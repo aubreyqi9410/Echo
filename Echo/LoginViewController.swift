@@ -9,19 +9,34 @@
 import UIKit
 
 
+
 class LoginViewController: UIViewController {
+    
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
     
     }
     
     override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     
     }
     
+    
+    @IBAction func Login(sender: UIButton) {
+        let email = emailTextField.text
+        let password = passwordTextField.text
+        
+        
+    }
     
     
     
