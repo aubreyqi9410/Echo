@@ -8,16 +8,48 @@
 
 import UIKit
 import AVFoundation
+import Firebase
 
 class RecordViewController: UIViewController, AVAudioRecorderDelegate {
     
     var audioRecorder: AVAudioRecorder!
+
+    var recordingSession: AVAudioSession!
     
     //TODO: Generate file name for each recording
     let fileName = "demo.caf"
-
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /* Request user permission to access microphone */
+        
+        recordingSession = AVAudioSession.sharedInstance()
+        do {
+            try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try recordingSession.setActive(true)
+            recordingSession.requestRecordPermission(){
+                [unowned self] (allowed: Bool) -> Void in
+                dispatch_async(dispatch_get_main_queue()) {
+                    if allowed {
+                        self.loadRecordingUI()
+                        
+                    } else {
+                        self.loadFailUI()
+                    }
+                }
+                
+            }
+            
+        } catch {
+            
+            self.loadFailUI()
+            
+        }
+
+        
 
         // Do any additional setup after loading the view.
     }
@@ -27,8 +59,19 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    /* UI loader */
+    
+    func loadRecordingUI(){
+        
+    }
+    
+    func loadFailUI(){
+        
+    }
+    
     
     /* Set the settings for recorder */
+
     func setupRecorderAndRecord() {
         let recordSettings: [String: AnyObject] =
         [
@@ -46,19 +89,37 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
             audioRecorder.record()
             
             //TODO: Change button state
+
         } catch {
             finishRecording(false)
             
         }
     }
+
     
     func finishRecording(success: Bool) {
         
-    }
-    
-    func recordEcho() {
+        audioRecorder.stop()
+        audioRecorder = nil
         
+        if success {
+            var myRootRef = Firebase(url: "https://burning-fire-8901.firebaseio.com")
+            myRootRef.setValue("Hi");
+            
+        } else {
+            // restore to pre-recording state
+        }
+
     }
+
+    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool)
+    {
+        if !flag {
+            finishRecording(success: false)
+        }
+    }
+
+        
     
     /* Helper Methods */
     
@@ -68,8 +129,9 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     func getFileURL() -> NSURL {
-        let path = getCacheDirectory().stringByAppendingPathComponent(fileName)
-        
+        let path = getCacheDirectory().stringByAppendingString(fileName)
+        let filePath = NSURL(fileURLWithPath: path)
+        return filePath
        
     }
     
