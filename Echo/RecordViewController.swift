@@ -111,10 +111,24 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
         }
 
     }
+    
+
+
+    func encodeRecording(){
+        encodeFileName = "temp";
+        var error: NSError?
+
+        var fileLocation = NSString(string: NSBundle.mainBundle().pathForResource(encodeFileName, ofType: "mp3")!)
+
+        let fileData = NSData(contentsOfFile: fileLocation, options: NSDataReadingOptions.DataReadingMappedIfSafe, error: &error)
+
+        let base64String = fileData?.base64EncodedStringWithOptions(.allZeros)
+        println(base64String!)
+    }
 
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool)
     {
-        if !flag {
+        if (!flag) {
             finishRecording(success: false)
         }
     }
