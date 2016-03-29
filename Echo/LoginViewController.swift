@@ -46,14 +46,16 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func Login(sender: UIButton) {
+        //todo: user validation segue not working
+        
         let email = emailTextField.text
         let password = passwordTextField.text
         ref.authUser(email, password: password,
             withCompletionBlock: {
                 error, authData in
                 if error != nil{
-                    print("segue")
-                    self.performSegueWithIdentifier("showExplorationPage", sender: self)
+                    print("no segue")
+                   // self.performSegueWithIdentifier("showExplorationPage", sender: self)
                     
                 } else {
                     print("segue")
@@ -63,12 +65,7 @@ class LoginViewController: UIViewController {
                 
         })
 
-    
-    
-        
-        
-        
-    }
+  }
     
     func swipeLeft(recognizer: UISwipeGestureRecognizer){
  

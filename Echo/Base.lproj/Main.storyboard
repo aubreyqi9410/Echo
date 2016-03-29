@@ -75,7 +75,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2SW-rv-LXU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="943" y="-598"/>
+            <point key="canvasLocation" x="955" y="-598"/>
         </scene>
         <!--Item 2-->
         <scene sceneID="Xhb-HP-dO0">
@@ -102,7 +102,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5n-oc-2S3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="677" y="1631"/>
+            <point key="canvasLocation" x="7" y="2223"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="KwC-Ub-OKF">
+            <objects>
+                <viewController id="177-q4-z3m" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CB6-x0-3p7"/>
+                        <viewControllerLayoutGuide type="bottom" id="OFX-5D-6DM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yhp-uA-YR5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="8ml-Xd-LMU"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AC9-2G-vJh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="592" y="1294"/>
         </scene>
         <!--Item 1-->
         <scene sceneID="mgF-zo-bKm">
@@ -129,7 +149,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYQ-M1-2n6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="677" y="971"/>
+            <point key="canvasLocation" x="717" y="1757"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lUh-u7-QXy">
@@ -143,16 +163,17 @@
                     <connections>
                         <segue destination="QGq-1P-QLg" kind="relationship" relationship="viewControllers" id="9XJ-ys-6Hg"/>
                         <segue destination="MIh-SO-Rdl" kind="relationship" relationship="viewControllers" id="HKL-Lz-GeE"/>
+                        <segue destination="177-q4-z3m" kind="relationship" relationship="viewControllers" id="IWR-Ba-kHl"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uP7-kH-uMB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-143" y="1301"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="wKJ-lF-v5f">
             <objects>
-                <viewController id="AAZ-tY-uts" sceneMemberID="viewController">
+                <viewController id="AAZ-tY-uts" customClass="SignUpViewController" customModule="Echo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TBg-fk-MRp"/>
                         <viewControllerLayoutGuide type="bottom" id="Gy3-El-7zP"/>
@@ -160,12 +181,35 @@
                     <view key="view" contentMode="scaleToFill" id="hrI-aC-GSN">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4vv-4k-8Lq">
+                                <rect key="frame" x="252" y="80" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MZP-Te-wzf">
+                                <rect key="frame" x="252" y="137" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2da-mf-Fmy">
+                                <rect key="frame" x="277" y="208" width="46" height="30"/>
+                                <state key="normal" title="Create"/>
+                                <connections>
+                                    <action selector="createAccount:" destination="AAZ-tY-uts" eventType="touchUpInside" id="mPA-xU-eVa"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="password" destination="MZP-Te-wzf" id="qo5-Fp-u18"/>
+                        <outlet property="username" destination="4vv-4k-8Lq" id="0bD-vf-KqW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YeN-EK-PU5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="943" y="140"/>
+            <point key="canvasLocation" x="1037" y="156"/>
         </scene>
     </scenes>
 </document>

@@ -20,14 +20,16 @@ class InfoViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
         // Gesture recognizer to return to original screen
+        /*
         let recognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "swipeRight:")
         recognizer.direction = .Right
         self.view.addGestureRecognizer(recognizer)
+        */
     }
     
     func swipeRight(recognizer: UISwipeGestureRecognizer){
         
-        self.performSegueWithIdentifier("showLoginage", sender: self)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
