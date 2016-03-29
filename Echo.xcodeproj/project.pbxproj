@@ -17,6 +17,8 @@
 		3F1CAC271C74B9F10048BB0C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1CAC261C74B9F10048BB0C /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		3F1CAC291C74BA950048BB0C /* Voice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1CAC281C74BA950048BB0C /* Voice.swift */; settings = {ASSET_TAGS = (); }; };
 		3F2361DC1C87341B008C53E8 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2361DB1C87341B008C53E8 /* RecordViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		3F2E729B1CAA349900DB3E35 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E729A1CAA349900DB3E35 /* InfoViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		3F2E729D1CAA35F800DB3E35 /* ExplorationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E729C1CAA35F800DB3E35 /* ExplorationViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		6C5036A613AB26C94FE8AA2A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C0CFA9DEBB7C77F8F097D70 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,8 @@
 		3F1CAC261C74B9F10048BB0C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3F1CAC281C74BA950048BB0C /* Voice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Voice.swift; sourceTree = "<group>"; };
 		3F2361DB1C87341B008C53E8 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		3F2E729A1CAA349900DB3E35 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		3F2E729C1CAA35F800DB3E35 /* ExplorationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplorationViewController.swift; sourceTree = "<group>"; };
 		6689266739FA845182F693AF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7C0CFA9DEBB7C77F8F097D70 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21F5352CEF724271434D1F8 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -119,6 +123,8 @@
 				3F1CAC021C74B84D0048BB0C /* Info.plist */,
 				3F1CAC281C74BA950048BB0C /* Voice.swift */,
 				3F2361DB1C87341B008C53E8 /* RecordViewController.swift */,
+				3F2E729A1CAA349900DB3E35 /* InfoViewController.swift */,
+				3F2E729C1CAA35F800DB3E35 /* ExplorationViewController.swift */,
 			);
 			path = Echo;
 			sourceTree = "<group>";
@@ -343,7 +349,9 @@
 				3F1CAC291C74BA950048BB0C /* Voice.swift in Sources */,
 				3F1CAC271C74B9F10048BB0C /* LoginViewController.swift in Sources */,
 				3F2361DC1C87341B008C53E8 /* RecordViewController.swift in Sources */,
+				3F2E729D1CAA35F800DB3E35 /* ExplorationViewController.swift in Sources */,
 				3F1CABF91C74B84D0048BB0C /* ViewController.swift in Sources */,
+				3F2E729B1CAA349900DB3E35 /* InfoViewController.swift in Sources */,
 				3F1CABF71C74B84D0048BB0C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,7 +499,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.duke.yq25.Echo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -509,7 +517,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.duke.yq25.Echo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Release;
 		};

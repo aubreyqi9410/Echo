@@ -26,6 +26,7 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
         
         /* Request user permission to access microphone */
         
+        /*
         recordingSession = AVAudioSession.sharedInstance()
         do {
             try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
@@ -52,6 +53,8 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
         
 
         // Do any additional setup after loading the view.
+
+        */
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,6 +76,7 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
     /* Set the settings for recorder */
 
     func setupRecorderAndRecord() {
+        /*
         let recordSettings: [String: AnyObject] =
         [
             AVFormatIDKey: kAudioFormatAppleLossless,
@@ -94,10 +98,13 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
             finishRecording(false)
             
         }
+        */
     }
 
     
     func finishRecording(success: Bool) {
+        
+        /*
         
         audioRecorder.stop()
         audioRecorder = nil
@@ -109,12 +116,14 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
         } else {
             // restore to pre-recording state
         }
+        */
 
     }
     
 
 
     func encodeRecording(){
+        /*
         encodeFileName = "temp";
         var error: NSError?
 
@@ -124,13 +133,16 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
 
         let base64String = fileData?.base64EncodedStringWithOptions(.allZeros)
         println(base64String!)
+        */
     }
 
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool)
     {
+        /*
         if (!flag) {
             finishRecording(success: false)
         }
+        */
     }
 
         
