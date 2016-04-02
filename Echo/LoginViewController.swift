@@ -15,12 +15,22 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var createNewLogin: UIButton!
+    @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var createNewLoginBtn: UIButton!
     
     let ref = Firebase(url: "https://burning-fire-8901.firebaseio.com")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        addConstraintsForEmailTxt()
+        
+        addConstraintsForLoginBtn()
+        
+        addConstraintsForNewAccountBtn()
+        
+        addConstraintsForPasswordTxt()
+        
         self.view.backgroundColor = UIColor(patternImage: UIImage(named:"loginscreen_background")!)
         
         // Gesture recognizer to show intro screen
@@ -83,6 +93,60 @@ class LoginViewController: UIViewController {
             let destinationViewController = barViewControllers.viewControllers![1] as! RecordViewController
         }
     }
+    
+    /* Constraints for UI Elements */
+    
+    func addConstraintsForEmailTxt(){
+        // emailTextField
+        let centerX = NSLayoutConstraint(item: self.emailTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        
+        let centerY = NSLayoutConstraint(item: self.emailTextField, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterY, multiplier: 1.5, constant: 0)
+        let width = NSLayoutConstraint(item: self.emailTextField, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Width, multiplier: 0.75, constant: 0)
+        
+        
+        self.view.addConstraint(width)
+        self.view.addConstraint(centerX)
+        self.view.addConstraint(centerY)
+        
+    }
+    
+    func addConstraintsForPasswordTxt(){
+        
+        let centerX = NSLayoutConstraint(item: self.passwordTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        
+        let centerY = NSLayoutConstraint(item: self.passwordTextField, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.emailTextField, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 30)
+        
+        let width = NSLayoutConstraint(item: self.passwordTextField, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Width, multiplier: 0.75, constant: 0)
+        
+        self.view.addConstraint(width)
+        self.view.addConstraint(centerX)
+        self.view.addConstraint(centerY)
+
+        
+    }
+    
+    func addConstraintsForLoginBtn(){
+        // login
+        let centerX = NSLayoutConstraint(item: loginBtn, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        let centerY = NSLayoutConstraint(item: loginBtn, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.passwordTextField, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 30)
+        let width = NSLayoutConstraint(item: loginBtn, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Width, multiplier: 0.75, constant: 0)
+
+        self.view.addConstraint(width);
+        self.view.addConstraint(centerX);
+        self.view.addConstraint(centerY);
+        
+        
+    }
+    
+    func addConstraintsForNewAccountBtn() {
+        let centerX = NSLayoutConstraint(item: createNewLoginBtn, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        let centerY = NSLayoutConstraint(item: createNewLoginBtn, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: -20)
+      
+        self.view.addConstraint(centerX);
+        self.view.addConstraint(centerY);
+    }
+    
+
     
     
     
