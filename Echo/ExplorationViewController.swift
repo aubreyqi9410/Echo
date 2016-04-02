@@ -10,6 +10,9 @@ import UIKit
 
 class ExplorationViewController: UIViewController {
 
+    @IBOutlet weak var settingBtn: UIButton!
+    @IBOutlet weak var echoLblImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,6 +23,7 @@ class ExplorationViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
 
     /*

@@ -73,9 +73,8 @@ class LoginViewController: UIViewController {
         ref.authUser(email, password: password,
             withCompletionBlock: {
                 error, authData in
-                if error != nil{
+                if (error != nil) {
                     print("no segue")
-                   // self.performSegueWithIdentifier("showExplorationPage", sender: self)
                     
                 } else {
                     print("segue")
