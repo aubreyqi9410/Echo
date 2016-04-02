@@ -17,6 +17,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var createNewLoginBtn: UIButton!
+    @IBOutlet var keyboardHeightLayoutConstraint: NSLayoutConstraint?
+
     
     let ref = Firebase(url: "https://burning-fire-8901.firebaseio.com")
     
@@ -38,6 +40,9 @@ class LoginViewController: UIViewController {
         recognizer.direction = .Left
         self.view.addGestureRecognizer(recognizer)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -48,6 +53,10 @@ class LoginViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     
@@ -93,6 +102,17 @@ class LoginViewController: UIViewController {
             let destinationViewController = barViewControllers.viewControllers![1] as! RecordViewController
         }
     }
+    
+    /* Register Keyboard */
+    
+    func keyboardWillShow(sender: NSNotification) {
+        self.view.frame.origin.y = -200
+    }
+    
+    func keyboardWillHide(sender: NSNotification) {
+        self.view.frame.origin.y = 0
+    }
+
     
     /* Constraints for UI Elements */
     
