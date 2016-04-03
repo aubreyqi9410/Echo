@@ -107,7 +107,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akv-Bi-OlF">
-                                <rect key="frame" x="241" y="285" width="120" height="30"/>
+                                <rect key="frame" x="240" y="490" width="120" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="9xl-wC-2fh"/>
                                 </constraints>
@@ -116,21 +116,42 @@
                                     <action selector="record:" destination="MIh-SO-Rdl" eventType="touchUpInside" id="aei-oK-P5g"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lUg-5a-699">
+                                <rect key="frame" x="59" y="490" width="42" height="30"/>
+                                <state key="normal" title="Listen"/>
+                                <connections>
+                                    <action selector="listen:" destination="MIh-SO-Rdl" eventType="touchUpInside" id="m23-ru-tze"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIm-gb-EV5">
+                                <rect key="frame" x="486" y="490" width="32" height="30"/>
+                                <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="goToUpload:" destination="MIh-SO-Rdl" eventType="touchUpInside" id="dLx-9E-JU6"/>
+                                    <segue destination="mRC-6N-wBq" kind="show" identifier="showUploadVC" id="wpi-SM-N61"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="akv-Bi-OlF" firstAttribute="centerY" secondItem="Ke0-kq-ydQ" secondAttribute="centerY" id="d0L-6U-sGz"/>
-                            <constraint firstItem="akv-Bi-OlF" firstAttribute="centerX" secondItem="Ke0-kq-ydQ" secondAttribute="centerX" constant="1" id="tqW-FU-RNu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lIm-gb-EV5" secondAttribute="trailing" constant="62" id="I5j-rJ-oaY"/>
+                            <constraint firstItem="lIm-gb-EV5" firstAttribute="baseline" secondItem="akv-Bi-OlF" secondAttribute="baseline" id="TBm-ne-pn6"/>
+                            <constraint firstItem="lUg-5a-699" firstAttribute="baseline" secondItem="akv-Bi-OlF" secondAttribute="baseline" id="XgP-0O-j5u"/>
+                            <constraint firstItem="akv-Bi-OlF" firstAttribute="centerY" secondItem="Ke0-kq-ydQ" secondAttribute="centerY" constant="205" id="d0L-6U-sGz"/>
+                            <constraint firstItem="lUg-5a-699" firstAttribute="leading" secondItem="Ke0-kq-ydQ" secondAttribute="leadingMargin" constant="39" id="edB-Gh-O6c"/>
+                            <constraint firstItem="akv-Bi-OlF" firstAttribute="centerX" secondItem="Ke0-kq-ydQ" secondAttribute="centerX" id="tqW-FU-RNu"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Storytell" image="storytell_icon" id="Yst-Jm-1GC"/>
                     <connections>
+                        <outlet property="listenBtn" destination="lUg-5a-699" id="XhC-Rb-XJF"/>
+                        <outlet property="nextBtn" destination="lIm-gb-EV5" id="xaC-e3-IMw"/>
                         <outlet property="recordBtn" destination="akv-Bi-OlF" id="zRb-W6-ZcZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5n-oc-2S3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7" y="2223"/>
+            <point key="canvasLocation" x="-413" y="2279"/>
         </scene>
         <!--Profile-->
         <scene sceneID="KwC-Ub-OKF">
@@ -151,6 +172,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AC9-2G-vJh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="592" y="1294"/>
+        </scene>
+        <!--Upload View Controller-->
+        <scene sceneID="bgo-RX-q9p">
+            <objects>
+                <viewController id="mRC-6N-wBq" customClass="UploadViewController" customModule="Echo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NgV-K0-YWr"/>
+                        <viewControllerLayoutGuide type="bottom" id="SWh-GA-Wve"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rku-KN-lAd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aT-Ao-b2G">
+                                <rect key="frame" x="280" y="448" width="40" height="30"/>
+                                <state key="normal" title="Share"/>
+                                <connections>
+                                    <action selector="shareEcho:" destination="mRC-6N-wBq" eventType="touchUpInside" id="CbK-al-2tv"/>
+                                    <segue destination="QGq-1P-QLg" kind="show" identifier="returnToExploreVC" id="JwP-9W-Q1z"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zE2-0D-VR2">
+                                <rect key="frame" x="180" y="236" width="240" height="128"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="quoteTextField" destination="zE2-0D-VR2" id="9a8-4v-yrL"/>
+                        <outlet property="shareBtn" destination="7aT-Ao-b2G" id="WUw-dp-IHB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Ru-Ae-XUV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-413" y="3060"/>
         </scene>
         <!--Explore-->
         <scene sceneID="mgF-zo-bKm">
@@ -262,7 +321,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYQ-M1-2n6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="806" y="2006"/>
+            <point key="canvasLocation" x="312" y="3060"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lUh-u7-QXy">
@@ -333,4 +392,7 @@
         <image name="setting_icon" width="24" height="24"/>
         <image name="storytell_icon" width="18" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="JwP-9W-Q1z"/>
+    </inferredMetricsTieBreakers>
 </document>

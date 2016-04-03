@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import AVFoundation
 
-class EchoFeedTableViewCell: UITableViewCell {
+class EchoFeedTableViewCell: UITableViewCell, AVAudioPlayerDelegate  {
 
     @IBOutlet weak var playBtn: UIButton!
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var locationLbl: UILabel!
     @IBOutlet weak var quoteLbl: UILabel!
+    
+    
+    var player: AVAudioPlayer!
+    var voiceData: NSData!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +33,21 @@ class EchoFeedTableViewCell: UITableViewCell {
     }
 
     @IBAction func playEcho(sender: UIButton) {
+        
+        do {
+            // var player = AVAudioPlayer()
+            player = try AVAudioPlayer(data: self.voiceData)
+            player.prepareToPlay()
+            player.volume = 1.0
+            player.delegate = self
+            player.play()
+            
+            
+            
+        } catch {
+            print ("Error getting the audio file")
+        }
+
         
         
     }

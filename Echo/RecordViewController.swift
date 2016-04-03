@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import Firebase
 
-class RecordViewController: UIViewController,  AVAudioRecorderDelegate {
+class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
     var audioRecorder: AVAudioRecorder!
 
@@ -18,9 +18,18 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate {
     
     @IBOutlet weak var recordBtn: UIButton!
     
+    @IBOutlet weak var listenBtn: UIButton!
+    
+    @IBOutlet weak var nextBtn: UIButton!
     
     //TODO: Generate file name for each recording
     var audioFilename: NSURL!
+    
+    var recordSuccess: Bool!
+    
+    var dataToUpload: NSData!
+    
+    var player: AVAudioPlayer!
     
     
     
@@ -75,7 +84,7 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate {
         
 
         
-        audioFilename = NSURL(fileURLWithPath: getDocumentsDirectory()).URLByAppendingPathComponent("recording.m4a")
+        audioFilename = NSURL(fileURLWithPath: getCacheDirectory()).URLByAppendingPathComponent("recording.m4a")
         // http://stackoverflow.com/questions/29739930/how-to-upload-recorded-audio-file-to-parse
         
         
@@ -117,6 +126,9 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate {
     }
     
     func loadRecordingUI(){
+        self.listenBtn.enabled = false
+        self.nextBtn.enabled = false
+        
         
     }
     
@@ -134,13 +146,14 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate {
         audioRecorder = nil
         
         if success {
-            var myRootRef = Firebase(url: "https://burning-fire-8901.firebaseio.com")
+            //var myRootRef = Firebase(url: "https://burning-fire-8901.firebaseio.com")
             //myRootRef.setValue("Hi");
             
-            let name = "test"
+            //let name = "test"
             
-            let dataToUpload: NSData = NSData(contentsOfURL: self.audioFilename)!
+            dataToUpload = NSData(contentsOfURL: self.audioFilename)!
             
+            /*
             let base64String = dataToUpload.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
             
             let recording: NSDictionary = ["name": name, "photoBase64":base64String]
@@ -148,18 +161,17 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate {
             let voice = myRootRef.ref.childByAppendingPath(name)
             
             voice.setValue(recording)
-            
-            
-            
+            */
 
-            
-            
-            
             recordBtn.setTitle("Tap to Re-record", forState: .Normal)
+            self.recordSuccess = true
+            self.listenBtn.enabled = true
+            self.nextBtn.enabled = true
             
         } else {
             // restore to pre-recording state
             recordBtn.setTitle("Tap to Record", forState: .Normal)
+            self.recordSuccess = false
 
         }
         
@@ -167,6 +179,34 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate {
     }
     
 
+    @IBAction func listen(sender: AnyObject) {
+        
+        if (self.recordSuccess!){
+            self.listenBtn.enabled = true
+            do {
+               // var player = AVAudioPlayer()
+                player = try AVAudioPlayer(data: self.dataToUpload)
+                player.prepareToPlay()
+                player.volume = 1.0
+                player.delegate = self
+                player.play()
+                
+                
+            } catch {
+                print ("Error getting the audio file")
+            }
+            
+        } else {
+            
+        }
+        
+    }
+    
+    
+    @IBAction func goToUpload(sender: UIButton) {
+        self.performSegueWithIdentifier("showUploadVC", sender: self)
+        
+    }
 
     func encodeRecording(){
         /*
@@ -209,14 +249,18 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate {
 */
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if(segue.identifier == "showUploadVC"){
+            let uploadVC = segue.destinationViewController as!UploadViewController
+            uploadVC.voiceData = self.dataToUpload
+        }
     }
-    */
+    
 
 }

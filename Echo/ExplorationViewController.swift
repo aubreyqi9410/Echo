@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import Firebase
 
 class ExplorationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     
     struct Echo {
-        var name: String
-        var location: String
+        var name: String!
+        var location: String!
+        var voiceData: NSData!
     }
     
     var tableData: [Echo] = []
@@ -21,15 +23,25 @@ class ExplorationViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var settingBtn: UIButton!
     @IBOutlet weak var echoLblImageView: UIImageView!
     
+    var ref = Firebase(url: "https://burning-fire-8901.firebaseio.com/test")
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addConstraintsForEchoLbl()
         addConstraintsForSettingsBtn()
-        tableData = [
-            Echo(name: "test", location: "test"),
-            Echo(name: "test", location: "test")
-
-        ]
+        
+        ref.observeEventType(.Value, withBlock: { snapshot in
+                let name = snapshot.value.objectForKey("name") as! String
+                let base64String = snapshot.value.objectForKey("voiceBase64")
+                let quote = snapshot.value.objectForKey("quote")
+                let decodeData = NSData(base64EncodedString: snapshot.value as! String, options: NSDataBase64DecodingOptions())
+                let echo = Echo(name: name, location: "here", voiceData: decodeData)
+                self.tableData.append(echo)
+            
+            
+            })
         
 
         // Do any additional setup after loading the view.
@@ -52,6 +64,7 @@ class ExplorationViewController: UIViewController, UITableViewDelegate, UITableV
         
         cell.nameLbl.text = "test"
         cell.locationLbl.text = "test"
+        cell.voiceData = self.tableData.first?.voiceData
     
         return cell;
     }
