@@ -20,6 +20,7 @@ class ExplorationViewController: UIViewController, UITableViewDelegate, UITableV
     
     var tableData: [Echo] = []
 
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var settingBtn: UIButton!
     @IBOutlet weak var echoLblImageView: UIImageView!
     
@@ -28,23 +29,38 @@ class ExplorationViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     override func viewDidLoad() {
+        loadData()
         super.viewDidLoad()
         addConstraintsForEchoLbl()
         addConstraintsForSettingsBtn()
-        
-        ref.observeEventType(.Value, withBlock: { snapshot in
-                let name = snapshot.value.objectForKey("name") as! String
-                let base64String = snapshot.value.objectForKey("voiceBase64")
-                let quote = snapshot.value.objectForKey("quote")
-                let decodeData = NSData(base64EncodedString: snapshot.value as! String, options: NSDataBase64DecodingOptions())
-                let echo = Echo(name: name, location: "here", voiceData: decodeData)
-                self.tableData.append(echo)
-            
-            
-            })
+
         
 
         // Do any additional setup after loading the view.
+    }
+    
+    func loadData(){
+        
+        ref.observeEventType(.Value, withBlock: { snapshot in
+            let name = snapshot.value.objectForKey("name") as! String
+            let base64String = snapshot.value.objectForKey("voiceBase64") as! String
+            print(base64String)
+            let quote = snapshot.value.objectForKey("quote") as! String
+            var decodeData = NSData(base64EncodedString: base64String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
+            if (decodeData != nil){
+                print("not nil")
+            }
+            let echo = Echo(name: name, location: quote, voiceData: decodeData)
+            
+            self.tableData.append(echo)
+            print("data appended")
+            self.tableView.reloadData()
+            
+            
+            
+            
+        })
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,9 +68,17 @@ class ExplorationViewController: UIViewController, UITableViewDelegate, UITableV
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: - Table view data source
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    
     
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(tableData.count)
         return tableData.count;
     }
     
@@ -63,9 +87,8 @@ class ExplorationViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = tableView.dequeueReusableCellWithIdentifier("echoCell") as! EchoFeedTableViewCell
         
         cell.nameLbl.text = "test"
-        cell.locationLbl.text = "test"
-        cell.voiceData = self.tableData.first?.voiceData
-    
+        cell.locationLbl.text = self.tableData[0].location
+        cell.voiceData = self.tableData[0].voiceData
         return cell;
     }
     

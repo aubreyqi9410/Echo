@@ -151,7 +151,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5n-oc-2S3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-413" y="2279"/>
+            <point key="canvasLocation" x="-999" y="2357"/>
         </scene>
         <!--Profile-->
         <scene sceneID="KwC-Ub-OKF">
@@ -190,7 +190,6 @@
                                 <state key="normal" title="Share"/>
                                 <connections>
                                     <action selector="shareEcho:" destination="mRC-6N-wBq" eventType="touchUpInside" id="CbK-al-2tv"/>
-                                    <segue destination="QGq-1P-QLg" kind="show" identifier="returnToExploreVC" id="JwP-9W-Q1z"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zE2-0D-VR2">
@@ -205,11 +204,12 @@
                     <connections>
                         <outlet property="quoteTextField" destination="zE2-0D-VR2" id="9a8-4v-yrL"/>
                         <outlet property="shareBtn" destination="7aT-Ao-b2G" id="WUw-dp-IHB"/>
+                        <segue destination="GH7-5D-T87" kind="show" identifier="returnToExploreVC" id="02N-XC-Qyx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ru-Ae-XUV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-413" y="3060"/>
+            <point key="canvasLocation" x="-361" y="2357"/>
         </scene>
         <!--Explore-->
         <scene sceneID="mgF-zo-bKm">
@@ -229,8 +229,19 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YIK-Go-aQ6">
+                                <rect key="frame" x="547" y="36" width="33" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" placeholder="YES" id="T0S-5j-iAH"/>
+                                    <constraint firstAttribute="width" constant="33" placeholder="YES" id="p1h-0c-oj4"/>
+                                </constraints>
+                                <state key="normal" image="setting_icon"/>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="echo" translatesAutoresizingMaskIntoConstraints="NO" id="ZLl-v2-cny">
+                                <rect key="frame" x="249" y="36" width="103" height="37"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="131" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AOe-EA-BRW">
-                                <rect key="frame" x="0.0" y="89" width="600" height="398"/>
+                                <rect key="frame" x="0.0" y="89" width="600" height="400"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="echoCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="echoCell" rowHeight="131" id="9Yu-tt-zD1" customClass="EchoFeedTableViewCell" customModule="Echo" customModuleProvider="target">
@@ -292,17 +303,6 @@
                                     <outlet property="delegate" destination="QGq-1P-QLg" id="KOv-iu-Piy"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YIK-Go-aQ6">
-                                <rect key="frame" x="547" y="36" width="33" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="29" placeholder="YES" id="T0S-5j-iAH"/>
-                                    <constraint firstAttribute="width" constant="33" placeholder="YES" id="p1h-0c-oj4"/>
-                                </constraints>
-                                <state key="normal" image="setting_icon"/>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="echo" translatesAutoresizingMaskIntoConstraints="NO" id="ZLl-v2-cny">
-                                <rect key="frame" x="249" y="36" width="103" height="37"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.2470588235" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -317,11 +317,12 @@
                     <connections>
                         <outlet property="echoLblImageView" destination="ZLl-v2-cny" id="dfz-4r-Glq"/>
                         <outlet property="settingBtn" destination="YIK-Go-aQ6" id="v71-nd-oGu"/>
+                        <outlet property="tableView" destination="AOe-EA-BRW" id="cV7-jP-vSn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYQ-M1-2n6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="312" y="3060"/>
+            <point key="canvasLocation" x="434" y="2324"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lUh-u7-QXy">
@@ -393,6 +394,6 @@
         <image name="storytell_icon" width="18" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JwP-9W-Q1z"/>
+        <segue reference="02N-XC-Qyx"/>
     </inferredMetricsTieBreakers>
 </document>

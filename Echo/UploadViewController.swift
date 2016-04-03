@@ -43,7 +43,7 @@ class UploadViewController: UIViewController {
         let voice = myRootRef.ref.childByAppendingPath(name)
         
         voice.setValue(recording)
-        //self.performSegueWithIdentifier("returnToExploreVC", sender: self)
+    self.performSegueWithIdentifier("returnToExploreVC", sender: self)
            
         
         
