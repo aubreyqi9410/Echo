@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import Firebase
 
-class RecordViewController: UIViewController, AVAudioRecorderDelegate {
+class RecordViewController: UIViewController,  AVAudioRecorderDelegate {
     
     var audioRecorder: AVAudioRecorder!
 
@@ -20,7 +20,7 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
     
     
     //TODO: Generate file name for each recording
-    let fileName = "demo.caf"
+    var audioFilename: NSURL!
     
     
     
@@ -59,6 +59,11 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
 
         
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -66,9 +71,14 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     func startRecording(){
+        
+        
 
         
-        let audioFilename = NSURL(fileURLWithPath: getDocumentsDirectory()).URLByAppendingPathComponent("recording.m4a")
+        audioFilename = NSURL(fileURLWithPath: getDocumentsDirectory()).URLByAppendingPathComponent("recording.m4a")
+        // http://stackoverflow.com/questions/29739930/how-to-upload-recorded-audio-file-to-parse
+        
+        
         print(audioFilename)
         
         let audioURL = audioFilename
@@ -124,8 +134,27 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
         audioRecorder = nil
         
         if success {
-            //var myRootRef = Firebase(url: "https://burning-fire-8901.firebaseio.com")
+            var myRootRef = Firebase(url: "https://burning-fire-8901.firebaseio.com")
             //myRootRef.setValue("Hi");
+            
+            let name = "test"
+            
+            let dataToUpload: NSData = NSData(contentsOfURL: self.audioFilename)!
+            
+            let base64String = dataToUpload.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+            
+            let recording: NSDictionary = ["name": name, "photoBase64":base64String]
+            
+            let voice = myRootRef.ref.childByAppendingPath(name)
+            
+            voice.setValue(recording)
+            
+            
+            
+
+            
+            
+            
             recordBtn.setTitle("Tap to Re-record", forState: .Normal)
             
         } else {
@@ -169,12 +198,15 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
          return paths[0]
     }
     
+    /*
+    
     func getFileURL() -> NSURL {
         let path = getCacheDirectory().stringByAppendingString(fileName)
         let filePath = NSURL(fileURLWithPath: path)
         return filePath
        
     }
+*/
     
 
     /*
