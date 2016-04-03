@@ -16,6 +16,9 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
 
     var recordingSession: AVAudioSession!
     
+    @IBOutlet weak var recordBtn: UIButton!
+    
+    
     //TODO: Generate file name for each recording
     let fileName = "demo.caf"
     
@@ -26,7 +29,7 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
         
         /* Request user permission to access microphone */
         
-        /*
+        
         recordingSession = AVAudioSession.sharedInstance()
         do {
             try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
@@ -54,7 +57,7 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
 
         // Do any additional setup after loading the view.
 
-        */
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,7 +65,46 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    /* UI loader */
+    func startRecording(){
+
+        
+        let audioFilename = NSURL(fileURLWithPath: getDocumentsDirectory()).URLByAppendingPathComponent("recording.m4a")
+        print(audioFilename)
+        
+        let audioURL = audioFilename
+        
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 12000.0,
+            AVNumberOfChannelsKey: 1 as NSNumber,
+            AVEncoderAudioQualityKey: AVAudioQuality.High.rawValue
+        ]
+        
+        do {
+            audioRecorder = try AVAudioRecorder(URL: audioURL, settings: settings)
+            audioRecorder.delegate = self
+            audioRecorder.record()
+            
+            recordBtn.setTitle("Tap to Stop", forState: .Normal)
+        } catch {
+            finishRecording(false)
+        }
+        
+    }
+    
+    func getDocumentsDirectory() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+
+    @IBAction func record(sender: AnyObject) {
+        if audioRecorder == nil {
+            startRecording()
+        } else {
+            finishRecording(true)
+        }
+    }
     
     func loadRecordingUI(){
         
@@ -73,50 +115,25 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     
-    /* Set the settings for recorder */
-
-    func setupRecorderAndRecord() {
-        /*
-        let recordSettings: [String: AnyObject] =
-        [
-            AVFormatIDKey: kAudioFormatAppleLossless,
-            AVEncoderAudioQualityKey : AVAudioQuality.Max.rawValue as NSNumber,
-            AVEncoderBitRateKey : 320000 as NSNumber,
-            AVNumberOfChannelsKey: 2 as NSNumber,
-            AVSampleRateKey : 44100.0 as NSNumber
-        ]
-        
-        do {
-            
-            audioRecorder = try AVAudioRecorder(URL: getFileURL(), settings: recordSettings)
-            audioRecorder.delegate = self
-            audioRecorder.record()
-            
-            //TODO: Change button state
-
-        } catch {
-            finishRecording(false)
-            
-        }
-        */
-    }
-
     
     func finishRecording(success: Bool) {
         
-        /*
+        
         
         audioRecorder.stop()
         audioRecorder = nil
         
         if success {
-            var myRootRef = Firebase(url: "https://burning-fire-8901.firebaseio.com")
-            myRootRef.setValue("Hi");
+            //var myRootRef = Firebase(url: "https://burning-fire-8901.firebaseio.com")
+            //myRootRef.setValue("Hi");
+            recordBtn.setTitle("Tap to Re-record", forState: .Normal)
             
         } else {
             // restore to pre-recording state
+            recordBtn.setTitle("Tap to Record", forState: .Normal)
+
         }
-        */
+        
 
     }
     
@@ -136,13 +153,11 @@ class RecordViewController: UIViewController, AVAudioRecorderDelegate {
         */
     }
 
-    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool)
-    {
-        /*
-        if (!flag) {
-            finishRecording(success: false)
+    
+    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
+            finishRecording(false)
         }
-        */
     }
 
         
