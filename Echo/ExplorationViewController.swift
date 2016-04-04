@@ -29,16 +29,27 @@ class ExplorationViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     override func viewDidLoad() {
+        tableView.allowsSelection = false
+        tableView.separatorStyle = .None
         loadData()
         super.viewDidLoad()
         addConstraintsForEchoLbl()
         addConstraintsForSettingsBtn()
+        addConstraintsForTableView()
 
         
 
         // Do any additional setup after loading the view.
     }
+ 
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
+   
     func loadData(){
         
         ref.observeEventType(.Value, withBlock: { snapshot in
@@ -92,30 +103,47 @@ class ExplorationViewController: UIViewController, UITableViewDelegate, UITableV
         return cell;
     }
     
+    func addConstraintsForTableView(){
+        
+        let height = NSLayoutConstraint(item: self.tableView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Height, multiplier: 0.85, constant: 0)
+        
+        let bottomY = NSLayoutConstraint(item: self.tableView, attribute: .BottomMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: .BottomMargin, multiplier: 1, constant: 0)
+        self.view.addConstraint(height)
+        self.view.addConstraint(bottomY)
+        
+    }
+    
     func addConstraintsForEchoLbl(){
         
         let centerX = NSLayoutConstraint(item: self.echoLblImageView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
         
         let centerY = NSLayoutConstraint(item: self.echoLblImageView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.TopMargin, multiplier: 1, constant: 50)
         
-        let width = NSLayoutConstraint(item: self.echoLblImageView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Width, multiplier: 0.25, constant: 0)
+        let width = NSLayoutConstraint(item: self.echoLblImageView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Width, multiplier: 0.35, constant: 0)
+        
+        let height = NSLayoutConstraint(item: self.echoLblImageView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.echoLblImageView, attribute: NSLayoutAttribute.Width, multiplier: 0.3, constant: 0)
         
         self.view.addConstraint(centerX)
         self.view.addConstraint(centerY)
         self.view.addConstraint(width)
+        self.view.addConstraint(height)
         
     }
     
     func addConstraintsForSettingsBtn(){
-        let centerX = NSLayoutConstraint(item: self.settingBtn, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.TrailingMargin, multiplier: 1, constant: -20)
+        let centerX = NSLayoutConstraint(item: self.settingBtn, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.TrailingMargin, multiplier: 1, constant: -10)
         
         let centerY = NSLayoutConstraint(item: self.settingBtn, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.TopMargin, multiplier: 1, constant: 50)
         
-        let width = NSLayoutConstraint(item: self.settingBtn, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Width, multiplier: 0.1, constant: 0)
+        let width = NSLayoutConstraint(item: self.settingBtn, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Width, multiplier: 0.06, constant: 0)
+        self.view.addConstraint(width)
+        
+        let height = NSLayoutConstraint(item: self.settingBtn, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.settingBtn, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
+        self.view.addConstraint(height)
         
         self.view.addConstraint(centerX)
         self.view.addConstraint(centerY)
-        self.view.addConstraint(width)
+        
         
     }
     
