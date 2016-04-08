@@ -5,7 +5,7 @@
 //  Created by Ying Qi on 4/4/16.
 //  Copyright © 2016 Duke University. All rights reserved.
 //
-
+// http://zappdesigntemplates.com/cashapelayer-to-create-a-custom-progressbar/
 import UIKit
 
 class CircularLoaderView: UIView {
@@ -79,14 +79,14 @@ class CircularLoaderView: UIView {
         progressLabel.text = "Load content"
     }
     
-    func animateProgressView() {
+    func animateProgressView(duration: Double) {
         progressLabel.text = "Loading..."
         progressLayer.strokeEnd = 0.0
         
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = CGFloat(0.0)
         animation.toValue = CGFloat(1.0)
-        animation.duration = 1.0
+        animation.duration = duration
         animation.delegate = self
         animation.removedOnCompletion = false
         animation.additive = true

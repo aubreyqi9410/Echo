@@ -122,7 +122,7 @@ class LoginViewController: UIViewController {
         let centerY = NSLayoutConstraint(item: self.emailTextField, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterY, multiplier: 1.5, constant: 0)
         let width = NSLayoutConstraint(item: self.emailTextField, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Width, multiplier: 0.75, constant: 0)
         
-        
+        self.emailTextField.layer.cornerRadius = 15
         self.view.addConstraint(width)
         self.view.addConstraint(centerX)
         self.view.addConstraint(centerY)
@@ -136,6 +136,7 @@ class LoginViewController: UIViewController {
         let centerY = NSLayoutConstraint(item: self.passwordTextField, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.emailTextField, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 30)
         
         let width = NSLayoutConstraint(item: self.passwordTextField, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Width, multiplier: 0.75, constant: 0)
+        self.passwordTextField.layer.cornerRadius = 15
         
         self.view.addConstraint(width)
         self.view.addConstraint(centerX)
@@ -149,7 +150,7 @@ class LoginViewController: UIViewController {
         let centerX = NSLayoutConstraint(item: loginBtn, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
         let centerY = NSLayoutConstraint(item: loginBtn, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.passwordTextField, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 30)
         let width = NSLayoutConstraint(item: loginBtn, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Width, multiplier: 0.75, constant: 0)
-
+        self.loginBtn.layer.cornerRadius = 15
         self.view.addConstraint(width);
         self.view.addConstraint(centerX);
         self.view.addConstraint(centerY);

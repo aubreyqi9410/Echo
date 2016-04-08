@@ -14,9 +14,9 @@ class ChatViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let progressView = CircularLoaderView(frame: CGRectMake(0, 0, 100, 100))
+        let progressView = CircularLoaderView(frame: CGRectMake(100, 100, 100, 100))
         self.view.addSubview(progressView)
-        progressView.animateProgressView()
+        progressView.animateProgressView(10.0)
         print("view loaded")
     }
 
