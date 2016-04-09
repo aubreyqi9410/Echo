@@ -105,6 +105,15 @@ class RecordBtnView: UIView {
         
         
     }
+    
+    func recordAgain(){
+        addConstraints()
+        self.playImgView?.removeFromSuperview()
+        self.pauseImageView?.removeFromSuperview()
+        self.addSubview(recordingImgView!)
+        currentState = .Ready
+        
+    }
 
     
 

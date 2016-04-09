@@ -11,18 +11,12 @@ import AVFoundation
 import Firebase
 
 class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioPlayerDelegate {
+    @IBOutlet weak var recordAgainBtn: UIButton!
     
     var audioRecorder: AVAudioRecorder!
 
     var recordingSession: AVAudioSession!
     
-    
-    
-    @IBOutlet weak var recordBtn: UIButton!
-    
-    @IBOutlet weak var listenBtn: UIButton!
-    
-    @IBOutlet weak var nextBtn: UIButton!
     
     //TODO: Generate file name for each recording
     var audioFilename: NSURL!
@@ -65,10 +59,10 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
                 [unowned self] (allowed: Bool) -> Void in
                 dispatch_async(dispatch_get_main_queue()) {
                     if allowed {
-                        self.loadRecordingUI()
+                       // self.loadRecordingUI()
                         
                     } else {
-                        self.loadFailUI()
+                       // self.loadFailUI()
                     }
                 }
                 
@@ -76,7 +70,7 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
             
         } catch {
             
-            self.loadFailUI()
+           // self.loadFailUI()
             
         }
 
@@ -131,10 +125,7 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
             print("done - > playing...")
             self.listenToRecording()
             self.recordBtnView?.play()
-            
-
-
-            
+         
             break
         default:
             break
@@ -170,7 +161,7 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
             audioRecorder.delegate = self
             audioRecorder.record()
             
-            recordBtn.setTitle("Tap to Stop", forState: .Normal)
+            
         } catch {
             finishRecording(false)
         }
@@ -191,16 +182,6 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
         }
     }
     
-    func loadRecordingUI(){
-        self.listenBtn.enabled = false
-        self.nextBtn.enabled = false
-        
-        
-    }
-    
-    func loadFailUI(){
-        
-    }
     
     
     
@@ -212,31 +193,16 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
         audioRecorder = nil
         
         if success {
-            //var myRootRef = Firebase(url: "https://burning-fire-8901.firebaseio.com")
-            //myRootRef.setValue("Hi");
-            
-            //let name = "test"
+
             
             dataToUpload = NSData(contentsOfURL: self.audioFilename)!
-            
-            /*
-            let base64String = dataToUpload.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
-            
-            let recording: NSDictionary = ["name": name, "photoBase64":base64String]
-            
-            let voice = myRootRef.ref.childByAppendingPath(name)
-            
-            voice.setValue(recording)
-            */
 
-            recordBtn.setTitle("Tap to Re-record", forState: .Normal)
             self.recordSuccess = true
-            self.listenBtn.enabled = true
-            self.nextBtn.enabled = true
+  
             
         } else {
             // restore to pre-recording state
-            recordBtn.setTitle("Tap to Record", forState: .Normal)
+           
             self.recordSuccess = false
 
         }
@@ -244,15 +210,31 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
 
     }
     
+    @IBAction func test(sender: UIButton) {
+        print("testing")
+    }
+    @IBAction func recordAgain(sender: UIButton) {
+        
+        //self.recordBtnView?.beginRecording()
+        print("ready- > recording ...")
+        self.recordBtnView?.recordAgain()
+       // self.startRecording()
 
-    @IBAction func listen(sender: AnyObject) {
-        self.listenToRecording()
         
     }
     
+    /*
+
+    @IBAction func listen(sender: AnyObject) {
+        self.listenToRecording()
+
+    }
+*/
+    
+    
     func listenToRecording(){
         if (self.recordSuccess!){
-            self.listenBtn.enabled = true
+            
             do {
                 // var player = AVAudioPlayer()
                 player = try AVAudioPlayer(data: self.dataToUpload)
