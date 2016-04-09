@@ -43,6 +43,9 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
         
         /* Request user permission to access microphone */
         
+        let recordBtn = RecordBtnView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
+        self.view.addSubview(recordBtn)
+        
         
         recordingSession = AVAudioSession.sharedInstance()
         do {

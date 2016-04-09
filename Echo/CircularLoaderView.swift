@@ -25,12 +25,14 @@ class CircularLoaderView: UIView {
         //createLabel()
     }
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, createPauseBtn: Bool) {
         progressLabel = UILabel()
         pauseBtn = UIImageView()
         super.init(frame: frame)
         createProgressLayer()
-        createPauseBtn()
+        if (createPauseBtn){
+            self.createPauseBtn()
+        }
         //createLabel()
     }
     

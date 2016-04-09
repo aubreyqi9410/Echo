@@ -45,31 +45,10 @@ class PlayBtnView: UIView {
     }
 
     
-   
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        btnImageView = UIImageView(image: playImage)
-        self.addSubview(btnImageView!)
-        
-        let gesture = UITapGestureRecognizer(target: self, action: "changeView:")
-        addConstraints()
-        gesture.addTarget(self, action: "changeView:")
-        self.addGestureRecognizer(gesture)
-        self.userInteractionEnabled = true
-       
-    }
-    
-
-    
-    
-    
-    
-    //let gesture = UITapGestureRecognizer(target: self, action: "changeView:")
     
     
     func changeView(sender: UIGestureRecognizer? = nil){
@@ -81,7 +60,7 @@ class PlayBtnView: UIView {
             isPlaying = true
             btnImageView?.removeFromSuperview()
             print("2")
-            progressView = CircularLoaderView(frame: self.frame)
+            progressView = CircularLoaderView(frame: self.frame, createPauseBtn: true)
             self.addConstraints()
             self.addSubview(progressView!)
             progressView!.animateProgressView(duration!)
@@ -96,9 +75,7 @@ class PlayBtnView: UIView {
             progressView?.removeFromSuperview()
             print("4")
             self.addConstraints()
-            self.addSubview(btnImageView!)
-            
-            
+            self.addSubview(btnImageView!) 
             
         }
         
