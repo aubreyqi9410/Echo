@@ -12,6 +12,8 @@ import Firebase
 class UploadViewController: UIViewController {
     
     var voiceData: NSData!
+    
+    var voiceUID: String!
 
     @IBOutlet weak var quoteTextField: UITextView!
     
@@ -31,19 +33,33 @@ class UploadViewController: UIViewController {
 
     @IBAction func shareEcho(sender: UIButton) {
         var myRootRef = Firebase(url: "https://burning-fire-8901.firebaseio.com")
+        let voiceRef = Firebase(url: "https://burning-fire-8901.firebaseio.com/voice")
+
         //myRootRef.setValue("Hi");
         
-        let name = "test"
+        let name = self.voiceUID
         
         
-        let base64String = voiceData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+        let base64String = voiceData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength) as! String
         
-        let recording: NSDictionary = ["name": name, "quote": quoteTextField.text ,"voiceBase64":base64String]
+        var currentDateTime = NSDate()
+        var formatter = NSDateFormatter()
+        formatter.dateFormat = "ddMMyyyy-HHmm"
+        var uploadTime = formatter.stringFromDate(currentDateTime) as! String
         
-        let voice = myRootRef.ref.childByAppendingPath(name)
+        let recording: NSDictionary = ["user": myRootRef.authData.uid as! String,
+                                       "quote": quoteTextField.text ,
+                                       "voiceBase64":base64String,
+                                       "location": "Durham, NC",
+                                       "time": uploadTime,
+                                       "tags": "",
+                                       "likes": "",
+                                       "replies": ""]
+        
+        let voice = voiceRef.childByAutoId()
         
         voice.setValue(recording)
-    self.performSegueWithIdentifier("returnToExploreVC", sender: self)
+        self.performSegueWithIdentifier("returnToExploreVC", sender: self)
            
         
         

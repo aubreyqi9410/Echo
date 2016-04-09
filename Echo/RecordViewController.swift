@@ -31,6 +31,11 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
     
     var player: AVAudioPlayer!
     
+    var uid: String!
+    
+    let ref = Firebase(url:"https://burning-fire-8901.firebaseio.com")
+    
+    
     
     
     override func viewDidLoad() {
@@ -81,14 +86,18 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
     
     func startRecording(){
         
-        
+        // Create unique name for each voice
 
-        
-        audioFilename = NSURL(fileURLWithPath: getCacheDirectory()).URLByAppendingPathComponent("recording.m4a")
+        var currentDateTime = NSDate()
+        var formatter = NSDateFormatter()
+        formatter.dateFormat = "ddMMyyyy-HHmmss"
+        var recordingTime = formatter.stringFromDate(currentDateTime)
+        uid =  ref.authData.uid + recordingTime
+
+        audioFilename = NSURL(fileURLWithPath: getCacheDirectory()).URLByAppendingPathComponent(uid)
         // http://stackoverflow.com/questions/29739930/how-to-upload-recorded-audio-file-to-parse
         
         
-        print(audioFilename)
         
         let audioURL = audioFilename
         
@@ -259,6 +268,7 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
         if(segue.identifier == "showUploadVC"){
             let uploadVC = segue.destinationViewController as!UploadViewController
             uploadVC.voiceData = self.dataToUpload
+            uploadVC.voiceUID = self.uid
         }
     }
     

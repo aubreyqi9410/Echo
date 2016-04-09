@@ -24,15 +24,17 @@ class ExplorationViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var settingBtn: UIButton!
     @IBOutlet weak var echoLblImageView: UIImageView!
     
-    var ref = Firebase(url: "https://burning-fire-8901.firebaseio.com/test")
+    var ref = Firebase(url: "https://burning-fire-8901.firebaseio.com/voice")
     
     
     
     override func viewDidLoad() {
         tableView.allowsSelection = false
         tableView.separatorStyle = .None
-        loadData()
+        
         super.viewDidLoad()
+        loadData()
+        self.tableView.reloadData()
         addConstraintsForEchoLbl()
         addConstraintsForSettingsBtn()
         addConstraintsForTableView()
@@ -52,26 +54,34 @@ class ExplorationViewController: UIViewController, UITableViewDelegate, UITableV
    
     func loadData(){
         
-        ref.observeEventType(.Value, withBlock: { snapshot in
-            let name = snapshot.value.objectForKey("name") as! String
-            let base64String = snapshot.value.objectForKey("voiceBase64") as! String
-            print(base64String)
-            let quote = snapshot.value.objectForKey("quote") as! String
-            var decodeData = NSData(base64EncodedString: base64String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
-            if (decodeData != nil){
-                print("not nil")
+
+       
+        
+        
+        ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
+            //print("value: " , snapshot.value)
+            let test = snapshot.childrenCount
+            let enumerator = snapshot.children
+            for rest in snapshot.children.allObjects as! [FDataSnapshot]{
+                print("loading echo")
+                
+                let username = rest.value.objectForKey("user") as! String
+                let base64String = rest.value.objectForKey("voiceBase64") as! String
+                let quote = rest.value.objectForKey("quote") as! String
+                var decodeData = NSData(base64EncodedString: base64String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
+                let echo = Echo(name: username, location: quote, voiceData: decodeData)
+                
+                self.tableData.append(echo)
+                print("data appended")
+                self.tableView.reloadData()
+                
+                
+                
             }
-            let echo = Echo(name: name, location: quote, voiceData: decodeData)
-            
-            self.tableData.append(echo)
-            print("data appended")
-            self.tableView.reloadData()
-            
             
             
             
         })
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,17 +99,19 @@ class ExplorationViewController: UIViewController, UITableViewDelegate, UITableV
     
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(tableData.count)
+       // print(tableData.count)
         return tableData.count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("echoCell") as! EchoFeedTableViewCell
+       // let cell = tableView.dequeueReusableCellWithIdentifier("echoCell") as! EchoFeedTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("echoCell", forIndexPath: indexPath) as! EchoFeedTableViewCell
+        print("row: ", indexPath.row)
         
-        cell.nameLbl.text = "test"
-        cell.locationLbl.text = self.tableData[0].location
-        cell.voiceData = self.tableData[0].voiceData
+        cell.nameLbl.text = self.tableData[indexPath.row].name
+        cell.locationLbl.text = self.tableData[indexPath.row].location
+        cell.voiceData = self.tableData[indexPath.row].voiceData
         return cell;
     }
     
