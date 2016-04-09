@@ -14,9 +14,12 @@ class ChatViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let progressView = CircularLoaderView(frame: CGRectMake(100, 100, 100, 100))
-        self.view.addSubview(progressView)
-        progressView.animateProgressView(10.0)
+        //let progressView = CircularLoaderView(frame: CGRectMake(100, 100, 100, 100))
+        //self.view.addSubview(progressView)
+        //progressView.animateProgressView(10.0)
+        
+        let playBtn = PlayBtnView(frame: CGRectMake(100, 100, 100, 100), duration: 20)
+        self.view.addSubview(playBtn)
         print("view loaded")
     }
 

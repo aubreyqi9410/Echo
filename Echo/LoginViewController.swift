@@ -13,6 +13,7 @@ import Firebase
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var echo_Label: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginBtn: UIButton!
@@ -115,9 +116,24 @@ class LoginViewController: UIViewController {
     
     /* Constraints for UI Elements */
     
+    func addConstraintForEchoLabel(){
+         let centerX = NSLayoutConstraint(item: self.echo_Label, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0)
+        let centerY = NSLayoutConstraint(item: self.echo_Label, attribute: .CenterY, relatedBy: .Equal, toItem: self.view, attribute: .BottomMargin, multiplier: 0.2, constant: 0)
+        
+        let width = NSLayoutConstraint(item: self.echo_Label, attribute: .Width, relatedBy: .Equal, toItem: self.view, attribute: .Width, multiplier: 0.3, constant: 0)
+        
+        let height = NSLayoutConstraint(item: self.echo_Label, attribute: .Height, relatedBy: .Equal, toItem: self.view, attribute: .Width, multiplier: 0.75, constant: 0)
+        
+        self.view.addConstraint(centerX)
+        self.view.addConstraint(centerY)
+        self.view.addConstraint(width)
+        self.view.addConstraint(height)
+        
+    }
+    
     func addConstraintsForEmailTxt(){
         // emailTextField
-        let centerX = NSLayoutConstraint(item: self.emailTextField, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        let centerX = NSLayoutConstraint(item: self.emailTextField, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0)
         
         let centerY = NSLayoutConstraint(item: self.emailTextField, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterY, multiplier: 1.5, constant: 0)
         let width = NSLayoutConstraint(item: self.emailTextField, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Width, multiplier: 0.75, constant: 0)

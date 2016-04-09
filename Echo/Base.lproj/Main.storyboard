@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MIh-SO-Rdl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hj3-bF-aWv">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -40,13 +40,20 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nsu-ur-HCX">
                                 <rect key="frame" x="200" y="427" width="200" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJX-pJ-M2U">
                                 <rect key="frame" x="200" y="384" width="200" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="echo_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Bd9-la-42Z">
+                                <rect key="frame" x="227" y="113" width="147" height="106"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="106" placeholder="YES" id="PAc-Oc-nAA"/>
+                                    <constraint firstAttribute="width" constant="147" placeholder="YES" id="T0d-45-C3L"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -58,14 +65,18 @@
                             <constraint firstItem="LS5-7E-vPJ" firstAttribute="top" secondItem="sDJ-1l-4J2" secondAttribute="bottom" constant="81" placeholder="YES" id="QPu-ri-5Xg"/>
                             <constraint firstItem="AJX-pJ-M2U" firstAttribute="leading" secondItem="IdM-lx-xVS" secondAttribute="leadingMargin" constant="180" placeholder="YES" id="W4Q-9t-ACO"/>
                             <constraint firstItem="nsu-ur-HCX" firstAttribute="top" secondItem="AJX-pJ-M2U" secondAttribute="bottom" constant="13" placeholder="YES" id="WGw-r8-k9V"/>
+                            <constraint firstItem="Bd9-la-42Z" firstAttribute="centerX" secondItem="IdM-lx-xVS" secondAttribute="centerX" placeholder="YES" id="a8C-ah-QNq"/>
                             <constraint firstItem="k8J-OD-Jdo" firstAttribute="leading" secondItem="IdM-lx-xVS" secondAttribute="leadingMargin" constant="203" placeholder="YES" id="dgw-9t-YAp"/>
                             <constraint firstItem="nsu-ur-HCX" firstAttribute="leading" secondItem="IdM-lx-xVS" secondAttribute="leadingMargin" constant="180" placeholder="YES" id="f6G-ij-i64"/>
+                            <constraint firstItem="AJX-pJ-M2U" firstAttribute="top" secondItem="Bd9-la-42Z" secondAttribute="bottom" constant="165" placeholder="YES" id="i6s-yt-Zh2"/>
                             <constraint firstItem="AJX-pJ-M2U" firstAttribute="top" secondItem="WMs-hS-Ikf" secondAttribute="bottom" constant="364" placeholder="YES" id="pHX-IR-b3d"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sDJ-1l-4J2" secondAttribute="trailing" constant="180" placeholder="YES" id="pwP-By-XBY"/>
+                            <constraint firstItem="Bd9-la-42Z" firstAttribute="top" secondItem="WMs-hS-Ikf" secondAttribute="bottom" constant="93" placeholder="YES" id="zAy-Fe-2cB"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="createNewLoginBtn" destination="k8J-OD-Jdo" id="bqf-9p-0WB"/>
+                        <outlet property="echo_Label" destination="Bd9-la-42Z" id="zOv-4l-CgH"/>
                         <outlet property="emailTextField" destination="AJX-pJ-M2U" id="KEC-0n-cfm"/>
                         <outlet property="loginBtn" destination="sDJ-1l-4J2" id="8co-Aq-zhj"/>
                         <outlet property="passwordTextField" destination="nsu-ur-HCX" id="Azi-ec-YR9"/>
@@ -152,7 +163,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5n-oc-2S3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1183" y="1661"/>
+            <point key="canvasLocation" x="-1335" y="1161"/>
         </scene>
         <!--Item-->
         <scene sceneID="cxl-Jo-eF8">
@@ -212,9 +223,8 @@
                                     <action selector="shareEcho:" destination="mRC-6N-wBq" eventType="touchUpInside" id="CbK-al-2tv"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zE2-0D-VR2">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="My Quote Here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zE2-0D-VR2">
                                 <rect key="frame" x="180" y="236" width="240" height="128"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -260,7 +270,7 @@
                                 </constraints>
                                 <state key="normal" image="setting_icon"/>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="echo" translatesAutoresizingMaskIntoConstraints="NO" id="ZLl-v2-cny">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="echo_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ZLl-v2-cny">
                                 <rect key="frame" x="249" y="36" width="103" height="37"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="131" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AOe-EA-BRW">
@@ -274,7 +284,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="131"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Yu-tt-zD1" id="B8X-6T-2GG">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="130.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="131"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhW-bY-CST">
@@ -535,7 +545,7 @@
     </scenes>
     <resources>
         <image name="chat_icon" width="27" height="24"/>
-        <image name="echo" width="96" height="33"/>
+        <image name="echo_logo" width="141" height="77"/>
         <image name="explore_icon" width="24" height="24"/>
         <image name="like" width="23" height="20"/>
         <image name="next_arrow" width="10" height="18"/>

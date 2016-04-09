@@ -14,18 +14,34 @@ class CircularLoaderView: UIView {
     
     private var progressLabel: UILabel
     
+    private var pauseBtn: UIImageView
+    
     required init?(coder aDecoder: NSCoder) {
         progressLabel = UILabel()
+        pauseBtn = UIImageView()
         super.init(coder: aDecoder)
         createProgressLayer()
-        createLabel()
+        createPauseBtn()
+        //createLabel()
     }
     
     override init(frame: CGRect) {
         progressLabel = UILabel()
+        pauseBtn = UIImageView()
         super.init(frame: frame)
         createProgressLayer()
-        createLabel()
+        createPauseBtn()
+        //createLabel()
+    }
+    
+    func createPauseBtn(){
+        let pauseImage: UIImage = UIImage(named: "pause")!
+        pauseBtn = UIImageView(image: pauseImage)
+        addSubview(pauseBtn)
+        pauseBtn.center = CGPointMake(CGRectGetWidth(frame)/2 , CGRectGetHeight(frame)/2)
+ 
+
+        
     }
     
     func createLabel() {
@@ -37,6 +53,8 @@ class CircularLoaderView: UIView {
         progressLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(progressLabel)
         
+        
+        
         addConstraint(NSLayoutConstraint(item: self, attribute: .CenterX, relatedBy: .Equal, toItem: progressLabel, attribute: .CenterX, multiplier: 1.0, constant: 0.0))
         addConstraint(NSLayoutConstraint(item: self, attribute: .CenterY, relatedBy: .Equal, toItem: progressLabel, attribute: .CenterY, multiplier: 1.0, constant: 0.0))
     }
@@ -45,6 +63,11 @@ class CircularLoaderView: UIView {
         let startAngle = CGFloat(M_PI_2)
         let endAngle = CGFloat(M_PI * 2 + M_PI_2)
         let centerPoint = CGPointMake(CGRectGetWidth(frame)/2 , CGRectGetHeight(frame)/2)
+        
+        
+    
+        
+    
         
         let gradientMaskLayer = gradientMask()
         progressLayer.path = UIBezierPath(arcCenter:centerPoint, radius: CGRectGetWidth(frame)/2 - 30.0, startAngle:startAngle, endAngle:endAngle, clockwise: true).CGPath
@@ -65,9 +88,11 @@ class CircularLoaderView: UIView {
         
         gradientLayer.locations = [0.0, 1.0]
         
-        let colorTop: AnyObject = UIColor(red: 255.0/255.0, green: 213.0/255.0, blue: 63.0/255.0, alpha: 1.0).CGColor
-        let colorBottom: AnyObject = UIColor(red: 255.0/255.0, green: 198.0/255.0, blue: 5.0/255.0, alpha: 1.0).CGColor
-        let arrayOfColors: [AnyObject] = [colorTop, colorBottom]
+        let blueColor: AnyObject = UIColor(red: 194.0/255.0, green: 230.0/255.0, blue: 237.0/255.0, alpha: 1.0).CGColor
+        
+        //let colorTop: AnyObject = UIColor(red: 255.0/255.0, green: 213.0/255.0, blue: 63.0/255.0, alpha: 1.0).CGColor
+        //let colorBottom: AnyObject = UIColor(red: 255.0/255.0, green: 198.0/255.0, blue: 5.0/255.0, alpha: 1.0).CGColor
+        let arrayOfColors: [AnyObject] = [blueColor, blueColor]
         gradientLayer.colors = arrayOfColors
         
         return gradientLayer
