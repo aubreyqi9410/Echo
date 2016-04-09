@@ -16,6 +16,8 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
 
     var recordingSession: AVAudioSession!
     
+    
+    
     @IBOutlet weak var recordBtn: UIButton!
     
     @IBOutlet weak var listenBtn: UIButton!
@@ -33,6 +35,8 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
     
     var uid: String!
     
+    var recordBtnView: RecordBtnView?
+    
     let ref = Firebase(url:"https://burning-fire-8901.firebaseio.com")
     
     
@@ -41,10 +45,16 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /* Request user permission to access microphone */
+         NSNotificationCenter.defaultCenter().addObserver(self, selector: "receiveBtnState", name: "com.yingqi.Echo.RecordButtonState", object: nil)
         
-        let recordBtn = RecordBtnView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
-        self.view.addSubview(recordBtn)
+        /* Request user permission to access microphone */
+        recordBtnView = RecordBtnView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
+        
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("handleBtnTap:"))
+        self.recordBtnView!.addGestureRecognizer(gestureRecognizer)
+        //self.view.addGestureRecognizer(gestureRecognizer)
+        self.view.addSubview(recordBtnView!)
         
         
         recordingSession = AVAudioSession.sharedInstance()
@@ -85,6 +95,50 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func receiveBtnState(){
+            self.recordBtnView!.currentState = .Done
+            self.recordBtnView?.stopPlaying()
+           // self.stopListening()
+        
+        
+    }
+    
+    func handleBtnTap(sender: RecordBtnView){
+        print("called...")
+        switch self.recordBtnView!.currentState {
+        case .Ready:
+            self.recordBtnView?.beginRecording()
+            print("ready- > recording ...")
+            self.startRecording()
+            break
+            
+        case .Recording:
+            self.finishRecording(true)
+            self.recordBtnView?.stopRecording()
+            print("recording - > done ... ")
+
+            break
+        case .Playing:
+            print("playing - > done...")
+            self.recordBtnView?.stopPlaying()
+            self.stopListening()
+
+            break
+            
+        case.Done:
+            print("done - > playing...")
+            self.listenToRecording()
+            self.recordBtnView?.play()
+            
+
+
+            
+            break
+        default:
+            break
+        }
     }
     
     func startRecording(){
@@ -192,13 +246,18 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
     
 
     @IBAction func listen(sender: AnyObject) {
+        self.listenToRecording()
         
+    }
+    
+    func listenToRecording(){
         if (self.recordSuccess!){
             self.listenBtn.enabled = true
             do {
-               // var player = AVAudioPlayer()
+                // var player = AVAudioPlayer()
                 player = try AVAudioPlayer(data: self.dataToUpload)
                 player.prepareToPlay()
+                self.recordBtnView?.setRecordedVoiceDuration(player.duration)
                 player.volume = 1.0
                 player.delegate = self
                 player.play()
@@ -212,6 +271,10 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
             
         }
         
+    }
+    
+    func stopListening(){
+        player.stop()
     }
     
     

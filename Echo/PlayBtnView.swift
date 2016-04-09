@@ -24,8 +24,10 @@ class PlayBtnView: UIView {
     
     
     let playImage: UIImage = UIImage(named: "playBtn")!
+    let pauseImage: UIImage = UIImage(named: "pause")!
     
-    var btnImageView: UIImageView?
+    var playImageView: UIImageView?
+    var pauseImageView: UIImageView?
     var progressView: CircularLoaderView?
     
    // var gestureDelegate: UIViewController?
@@ -33,8 +35,10 @@ class PlayBtnView: UIView {
     init(frame: CGRect, duration: Double){
         super.init(frame: frame)
         self.duration = duration
-        btnImageView = UIImageView(image: playImage)
-        self.addSubview(btnImageView!)
+        playImageView = UIImageView(image: playImage)
+        pauseImageView = UIImageView(image: pauseImage)
+        
+        self.addSubview(playImageView!)
         
         let gesture = UITapGestureRecognizer(target: self, action: "changeView:")
         addConstraints()
@@ -58,9 +62,12 @@ class PlayBtnView: UIView {
             // not playing -> playing
             print("1")
             isPlaying = true
-            btnImageView?.removeFromSuperview()
+            //btnImageView? = UIImageView(image: pauseImage)
+            playImageView?.removeFromSuperview()
+            self.addSubview(pauseImageView!)
             print("2")
-            progressView = CircularLoaderView(frame: self.frame, createPauseBtn: true)
+            let myColor  = UIColor(red: 194.0/255.0, green: 230.0/255.0, blue: 237.0/255.0, alpha: 1.0)
+            progressView = CircularLoaderView(frame: self.frame, color: myColor)
             self.addConstraints()
             self.addSubview(progressView!)
             progressView!.animateProgressView(duration!)
@@ -72,10 +79,12 @@ class PlayBtnView: UIView {
             // playing -> not playing
             print("3")
             isPlaying = false
+            pauseImageView?.removeFromSuperview()
+            self.addSubview(playImageView!)
+
             progressView?.removeFromSuperview()
             print("4")
             self.addConstraints()
-            self.addSubview(btnImageView!) 
             
         }
         
@@ -83,8 +92,19 @@ class PlayBtnView: UIView {
     
     // Mark: Add Constraints
     func addConstraints(){
-        self.btnImageView?.center = CGPointMake(self.frame.width/2, self.frame.height/2)
-        self.progressView?.center = CGPointMake(self.frame.width/2, self.frame.height/2)
+        let center = CGPointMake(self.frame.width/2, self.frame.height/2)
+        let innerframe = CGRectMake(0.3*self.frame.width, 0.3*self.frame.height, 0.35*self.frame.width, 0.35*self.frame.height)
+        
+        
+        self.pauseImageView?.frame = innerframe
+        self.pauseImageView?.center = center
+        
+        
+        self.playImageView?.frame = innerframe
+        self.playImageView?.center = center
+        
+        self.progressView?.center = center
+        //self.progressView?.frame = innerframe
     }
 
 }

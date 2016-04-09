@@ -133,7 +133,7 @@ class ExplorationViewController: UIViewController, UITableViewDelegate, UITableV
         
         let width = NSLayoutConstraint(item: self.echoLblImageView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Width, multiplier: 0.35, constant: 0)
         
-        let height = NSLayoutConstraint(item: self.echoLblImageView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.echoLblImageView, attribute: NSLayoutAttribute.Width, multiplier: 0.3, constant: 0)
+        let height = NSLayoutConstraint(item: self.echoLblImageView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.echoLblImageView, attribute: NSLayoutAttribute.Width, multiplier: 0.4, constant: 0)
         
         self.view.addConstraint(centerX)
         self.view.addConstraint(centerY)

@@ -10,14 +10,8 @@ import UIKit
 
 class RecordBtnView: UIView {
     
-    enum State {
-        case Ready
-        case Recording
-        case Done
-        case Playing
-    }
     
-    var currentState = State.Ready
+    var currentState = ButtonState.Ready
     
     let duration: Double = 45
     
@@ -43,8 +37,6 @@ class RecordBtnView: UIView {
         
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.blueColor()
-        
         // initialize Images and ImageViews
         recordingImg = UIImage(named: "recording")!
         recordingImgView = UIImageView(image: recordingImg)
@@ -52,25 +44,20 @@ class RecordBtnView: UIView {
         playImg = UIImage(named: "play")!
         playImgView = UIImageView(image: playImg)
         
-        pauseImg = UIImage(named: "pause")!
+        pauseImg = UIImage(named: "pauseBtn")!
         pauseImageView = UIImageView(image: pauseImg)
         
         addConstraints()
-        
-        // add touch gesture
-        
-        let gesture = UITapGestureRecognizer(target: self, action: "changeView:")
-        gesture.addTarget(self, action: "changeView:")
-        self.addGestureRecognizer(gesture)
+
         self.userInteractionEnabled = true
     
         
         
         // set up initial state
         self.addSubview(recordingImgView!)
-        progressView = CircularLoaderView(frame: self.frame, createPauseBtn: false)
+        let color = UIColor(red: 241/255, green: 89/255, blue: 90/255, alpha: 1.0)
+        progressView = CircularLoaderView(frame: self.frame, color: color)
         self.addSubview(progressView!)
-        
         
         
         
@@ -82,38 +69,45 @@ class RecordBtnView: UIView {
     }
     
     
-    func changeView(sender: UIGestureRecognizer? = nil){
+    
+    func beginRecording(){
         addConstraints()
-        
-        switch currentState {
-        case .Ready:
-            self.progressView?.animateProgressView(duration)
-            currentState = .Recording
-            break
-            
-        case .Recording:
-            self.recordingImgView?.removeFromSuperview()
-            self.addSubview(self.playImgView!)
-            currentState = .Done
-            break
-        case .Playing:
-            self.pauseImageView?.removeFromSuperview()
-            self.addSubview(playImgView!)
-            currentState = .Done
-            break
-            
-        case.Done:
-            self.playImgView?.removeFromSuperview()
-            self.addSubview(pauseImageView!)
-            currentState = .Playing
-            break
-            
-        default:
-            break
-            
-        }
+        self.progressView?.animateProgressView(duration)
+        currentState = .Recording
         
     }
+    
+    func stopRecording(){
+        addConstraints()
+        self.recordingImgView?.removeFromSuperview()
+        self.addSubview(self.playImgView!)
+        self.progressView?.stopAnimation()
+        currentState = .Done
+        
+    }
+    
+    func stopPlaying(){
+        addConstraints()
+        self.pauseImageView?.removeFromSuperview()
+        self.addSubview(playImgView!)
+        self.progressView?.stopAnimation()
+        
+        currentState = .Done
+        
+    }
+    
+    func play(){
+        addConstraints()
+        self.playImgView?.removeFromSuperview()
+        self.addSubview(pauseImageView!)
+        self.progressView?.animateProgressView(self.voiceDuration)
+        currentState = .Playing
+        
+        
+    }
+
+    
+
     
     func addConstraints(){
         let origin = self.frame.origin
@@ -124,20 +118,28 @@ class RecordBtnView: UIView {
         print("center: ", center.x,  " ", center.y)
         let itemFrame = CGRectMake(0, 0, self.frame.width, self.frame.height)
         
-        let innerFrame = CGRectMake(0.3*self.frame.width, 0.3*self.frame.height, 0.5*self.frame.width, 0.5*self.frame.height)
+        let innerFrame = CGRectMake(0.3*self.frame.width, 0.3*self.frame.height, 0.35*self.frame.width, 0.35*self.frame.height)
         
-        self.recordingImgView!.center = center
+ 
+        
+        
         self.recordingImgView?.frame = innerFrame
+        self.recordingImgView!.center = center
         print("center: ", recordingImgView?.center.x,  " ", recordingImgView?.center.y)
         
         
-        self.playImgView?.center = center
+       
         self.playImgView?.frame = innerFrame
+        self.playImgView?.center = center
+        self.playImgView?.center.x += 5
+        
+        self.pauseImageView?.frame = innerFrame
         self.pauseImageView?.center = center
-        // self.pauseImageView?.frame = itemFrame
         
         self.progressView?.center = center
-        //self.progressView?.frame = itemFrame
+        self.progressView?.frame = itemFrame
+
+        
     }
     
     func setRecordedVoiceDuration(duration: Double){

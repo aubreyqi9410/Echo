@@ -27,6 +27,8 @@
 		3F2E729F1CAA48B000DB3E35 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E729E1CAA48B000DB3E35 /* SignUpViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		3F2E84FC1CB05FF2003458E4 /* EchoFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2E84FB1CB05FF2003458E4 /* EchoFeedTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		3F394B371CB8ABAF0082F732 /* RecordBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F394B361CB8ABAF0082F732 /* RecordBtnView.swift */; settings = {ASSET_TAGS = (); }; };
+		3F394B391CB96F8C0082F732 /* ButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F394B381CB96F8C0082F732 /* ButtonState.swift */; settings = {ASSET_TAGS = (); }; };
+		3F394B3B1CB983610082F732 /* NSNotificationCenterKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F394B3A1CB983610082F732 /* NSNotificationCenterKeys.swift */; settings = {ASSET_TAGS = (); }; };
 		6C5036A613AB26C94FE8AA2A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C0CFA9DEBB7C77F8F097D70 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -74,6 +76,8 @@
 		3F2E729E1CAA48B000DB3E35 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3F2E84FB1CB05FF2003458E4 /* EchoFeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EchoFeedTableViewCell.swift; sourceTree = "<group>"; };
 		3F394B361CB8ABAF0082F732 /* RecordBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordBtnView.swift; sourceTree = "<group>"; };
+		3F394B381CB96F8C0082F732 /* ButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonState.swift; sourceTree = "<group>"; };
+		3F394B3A1CB983610082F732 /* NSNotificationCenterKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNotificationCenterKeys.swift; sourceTree = "<group>"; };
 		6689266739FA845182F693AF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7C0CFA9DEBB7C77F8F097D70 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21F5352CEF724271434D1F8 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -146,9 +150,11 @@
 				3F2E84FB1CB05FF2003458E4 /* EchoFeedTableViewCell.swift */,
 				3F2AF1581CB18AD7002856C5 /* UploadViewController.swift */,
 				3F2402C21CB2DF4F00E0E92D /* CircularLoaderView.swift */,
+				3F394B3A1CB983610082F732 /* NSNotificationCenterKeys.swift */,
 				3F2402C81CB2E28300E0E92D /* ChatViewController.swift */,
 				3F2402CA1CB2ED1200E0E92D /* PlayBtnView.swift */,
 				3F394B361CB8ABAF0082F732 /* RecordBtnView.swift */,
+				3F394B381CB96F8C0082F732 /* ButtonState.swift */,
 			);
 			path = Echo;
 			sourceTree = "<group>";
@@ -376,9 +382,11 @@
 				3F1CAC291C74BA950048BB0C /* Voice.swift in Sources */,
 				3F1CAC271C74B9F10048BB0C /* LoginViewController.swift in Sources */,
 				3F2E729F1CAA48B000DB3E35 /* SignUpViewController.swift in Sources */,
+				3F394B3B1CB983610082F732 /* NSNotificationCenterKeys.swift in Sources */,
 				3F394B371CB8ABAF0082F732 /* RecordBtnView.swift in Sources */,
 				3F2361DC1C87341B008C53E8 /* RecordViewController.swift in Sources */,
 				3F2402CB1CB2ED1200E0E92D /* PlayBtnView.swift in Sources */,
+				3F394B391CB96F8C0082F732 /* ButtonState.swift in Sources */,
 				3F2402C11CB2A5F800E0E92D /* EchoLabelView.swift in Sources */,
 				3F2E729D1CAA35F800DB3E35 /* ExplorationViewController.swift in Sources */,
 				3F2402C91CB2E28300E0E92D /* ChatViewController.swift in Sources */,

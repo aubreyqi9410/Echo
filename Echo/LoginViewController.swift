@@ -26,6 +26,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addConstraintForEchoLabel()
+        
         addConstraintsForEmailTxt()
         
         addConstraintsForLoginBtn()
@@ -118,11 +120,11 @@ class LoginViewController: UIViewController {
     
     func addConstraintForEchoLabel(){
          let centerX = NSLayoutConstraint(item: self.echo_Label, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0)
-        let centerY = NSLayoutConstraint(item: self.echo_Label, attribute: .CenterY, relatedBy: .Equal, toItem: self.view, attribute: .BottomMargin, multiplier: 0.2, constant: 0)
+        let centerY = NSLayoutConstraint(item: self.echo_Label, attribute: .CenterY, relatedBy: .Equal, toItem: self.view, attribute: .BottomMargin, multiplier: 0.3, constant: 0)
         
-        let width = NSLayoutConstraint(item: self.echo_Label, attribute: .Width, relatedBy: .Equal, toItem: self.view, attribute: .Width, multiplier: 0.3, constant: 0)
+        let width = NSLayoutConstraint(item: self.echo_Label, attribute: .Width, relatedBy: .Equal, toItem: self.view, attribute: .Width, multiplier: 0.4, constant: 0)
         
-        let height = NSLayoutConstraint(item: self.echo_Label, attribute: .Height, relatedBy: .Equal, toItem: self.view, attribute: .Width, multiplier: 0.75, constant: 0)
+        let height = NSLayoutConstraint(item: self.echo_Label, attribute: .Height, relatedBy: .Equal, toItem: self.view, attribute: .Width, multiplier: 0.3, constant: 0)
         
         self.view.addConstraint(centerX)
         self.view.addConstraint(centerY)
