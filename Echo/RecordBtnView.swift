@@ -89,6 +89,7 @@ class RecordBtnView: UIView {
     func stopPlaying(){
         addConstraints()
         self.pauseImageView?.removeFromSuperview()
+        self.recordingImgView?.removeFromSuperview()
         self.addSubview(playImgView!)
         self.progressView?.stopAnimation()
         
@@ -99,6 +100,7 @@ class RecordBtnView: UIView {
     func play(){
         addConstraints()
         self.playImgView?.removeFromSuperview()
+        self.recordingImgView?.removeFromSuperview()
         self.addSubview(pauseImageView!)
         self.progressView?.animateProgressView(self.voiceDuration)
         currentState = .Playing
@@ -108,8 +110,10 @@ class RecordBtnView: UIView {
     
     func recordAgain(){
         addConstraints()
+        self.progressView?.stopAnimation()
         self.playImgView?.removeFromSuperview()
         self.pauseImageView?.removeFromSuperview()
+        //self.recordingImgView?.removeFromSuperview()
         self.addSubview(recordingImgView!)
         currentState = .Ready
         

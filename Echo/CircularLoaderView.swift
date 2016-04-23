@@ -13,6 +13,8 @@ class CircularLoaderView: UIView {
     private let progressLayer: CAShapeLayer = CAShapeLayer()
     private var color: UIColor?
     
+    private var replayPressed: Bool = false
+    
     required init?(coder aDecoder: NSCoder) {
     
         super.init(coder: aDecoder)
@@ -87,19 +89,24 @@ class CircularLoaderView: UIView {
     }
     
     func stopAnimation(){
+        print("stop animation called")
+        replayPressed = true
 
         progressLayer.removeAllAnimations()
         progressLayer.strokeEnd = 1
     }
     
     func animationDidStop() -> Bool {
-            print("sending notification")
+        print("sending notification")
+        if (!replayPressed){
             NSNotificationCenter.defaultCenter().postNotificationName(myNotificationKey , object: self)
+        }
             return true
     }
     
     
     override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+
         print("animation stopped")
         animationDidStop()
 

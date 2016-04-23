@@ -128,17 +128,27 @@
                                     <action selector="recordAgain:" destination="MIh-SO-Rdl" eventType="touchUpInside" id="1RU-4s-9zz"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sv3-6d-5q3">
+                                <rect key="frame" x="541" y="28" width="32" height="30"/>
+                                <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="goToUpload:" destination="MIh-SO-Rdl" eventType="touchUpInside" id="fcJ-y5-oX5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.40784313725490196" green="0.23137254901960785" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="faD-kh-RdZ" firstAttribute="top" secondItem="EfM-Nn-bqB" secondAttribute="bottom" constant="126" id="ObQ-WK-j3H"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Sv3-6d-5q3" secondAttribute="trailing" constant="7" id="TbX-Ky-Lov"/>
+                            <constraint firstItem="Sv3-6d-5q3" firstAttribute="top" secondItem="jva-2b-YY3" secondAttribute="bottom" constant="8" symbolic="YES" id="Z9Q-Mp-48y"/>
                             <constraint firstItem="EfM-Nn-bqB" firstAttribute="centerX" secondItem="Ke0-kq-ydQ" secondAttribute="centerX" id="xB4-uG-fvJ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Storytell" image="storytell_icon" id="Yst-Jm-1GC"/>
                     <connections>
                         <outlet property="recordAgainBtn" destination="EfM-Nn-bqB" id="77O-67-egI"/>
+                        <segue destination="mRC-6N-wBq" kind="show" identifier="showUploadVC" id="zoQ-Zy-lzq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5n-oc-2S3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -196,20 +206,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aT-Ao-b2G">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aT-Ao-b2G">
                                 <rect key="frame" x="280" y="448" width="40" height="30"/>
                                 <state key="normal" title="Share"/>
                                 <connections>
                                     <action selector="shareEcho:" destination="mRC-6N-wBq" eventType="touchUpInside" id="CbK-al-2tv"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="My Quote Here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zE2-0D-VR2">
-                                <rect key="frame" x="180" y="236" width="240" height="128"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="My Quote Here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zE2-0D-VR2">
+                                <rect key="frame" x="180" y="212" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="Dq0-yD-u8j"/>
+                                    <constraint firstAttribute="width" constant="240" id="T9m-9D-K3G"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SWh-GA-Wve" firstAttribute="top" secondItem="7aT-Ao-b2G" secondAttribute="bottom" constant="122" id="1U9-cs-FzW"/>
+                            <constraint firstItem="zE2-0D-VR2" firstAttribute="centerX" secondItem="rku-KN-lAd" secondAttribute="centerX" id="EKf-IY-tj8"/>
+                            <constraint firstItem="zE2-0D-VR2" firstAttribute="centerX" secondItem="7aT-Ao-b2G" secondAttribute="centerX" id="Ynb-6D-eEe"/>
+                            <constraint firstItem="zE2-0D-VR2" firstAttribute="top" secondItem="NgV-K0-YWr" secondAttribute="bottom" constant="192" id="g2a-Z2-o8Q"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="quoteTextField" destination="zE2-0D-VR2" id="9a8-4v-yrL"/>
@@ -219,7 +239,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ru-Ae-XUV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-501" y="1669"/>
+            <point key="canvasLocation" x="-361" y="1617"/>
         </scene>
         <!--Explore-->
         <scene sceneID="mgF-zo-bKm">
@@ -264,7 +284,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="131"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Yu-tt-zD1" id="B8X-6T-2GG">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="131"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="130.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhW-bY-CST">
@@ -536,7 +556,7 @@
         <image name="storytell_icon" width="18" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Joy-qT-qMU"/>
         <segue reference="Agp-P9-1RH"/>
+        <segue reference="02N-XC-Qyx"/>
     </inferredMetricsTieBreakers>
 </document>

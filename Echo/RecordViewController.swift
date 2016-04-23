@@ -21,11 +21,11 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
     //TODO: Generate file name for each recording
     var audioFilename: NSURL!
     
-    var recordSuccess: Bool!
+    var recordSuccess: Bool = false
     
     var dataToUpload: NSData!
     
-    var player: AVAudioPlayer!
+    var player: AVAudioPlayer = AVAudioPlayer()
     
     var uid: String!
     
@@ -91,6 +91,7 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
         // Dispose of any resources that can be recreated.
     }
     
+    // Playing to stop Playing
     func receiveBtnState(){
             self.recordBtnView!.currentState = .Done
             self.recordBtnView?.stopPlaying()
@@ -162,6 +163,7 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
             audioRecorder.record()
             
             
+            
         } catch {
             finishRecording(false)
         }
@@ -210,13 +212,12 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
 
     }
     
-    @IBAction func test(sender: UIButton) {
-        print("testing")
-    }
+
     @IBAction func recordAgain(sender: UIButton) {
         
         //self.recordBtnView?.beginRecording()
-        print("ready- > recording ...")
+        audioRecorder.stop()
+        print("ready -> recording ...")
         self.recordBtnView?.recordAgain()
        // self.startRecording()
 
@@ -233,7 +234,7 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
     
     
     func listenToRecording(){
-        if (self.recordSuccess!){
+        if (self.recordSuccess){
             
             do {
                 // var player = AVAudioPlayer()
