@@ -12,7 +12,9 @@ import Firebase
 
 class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
-    var topView: UIView!
+    @IBOutlet weak var topLabelView: UIView!
+    @IBOutlet weak var newEchoLabel: UIImageView!
+    
     
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var cancelBtn: UIButton!
@@ -46,7 +48,7 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
         
          NSNotificationCenter.defaultCenter().addObserver(self, selector: "receiveBtnState", name: "com.yingqi.Echo.RecordButtonState", object: nil)
         
-        loadTopView()
+        addConstraintsToTopLabelView()
         
         /* Request user permission to access microphone */
         loadRecordViewBtn()
@@ -277,6 +279,9 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
         
     }
 
+    @IBAction func cancel(sender: UIButton) {
+        print("cancel clicked")
+    }
     func encodeRecording(){
         /*
         encodeFileName = "temp";
@@ -348,26 +353,35 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
     }
     
     func loadTopView() {
-        topView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height/8))
         
-        let topLabel = UIImageView(image: UIImage(named: "new_echo_label"))
         
-        let topLabelWidth = topView.frame.width/3
+    }
+    
+    func addConstraintsToTopLabelView(){
+        let width = NSLayoutConstraint(item: self.topLabelView, attribute: .Width, relatedBy: .Equal, toItem: self.view, attribute: .Width, multiplier: 1, constant: 0)
+        let heightFraction:CGFloat = 1/6
+        let height = NSLayoutConstraint(item: self.topLabelView, attribute: .Height, relatedBy: .Equal, toItem: self.view, attribute: .Height, multiplier: heightFraction, constant: 0)
+        let centerYOffset = (-self.view.frame.height/2 + self.view.frame.height * heightFraction * 0.5)
+        let centerY = NSLayoutConstraint(item: self.topLabelView, attribute: .CenterY, relatedBy: .Equal, toItem: self.view, attribute: .CenterY, multiplier: 1, constant: centerYOffset)
         
-        let topLabelHeight = topView.frame.height * 0.2
+        let centerX = NSLayoutConstraint(item: self.topLabelView, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0)
         
-        topLabel.frame = CGRect(x: topView.frame.width/2 - topLabelWidth/2, y: topView.frame.height/2 - topLabelHeight/2 + 10 , width: topLabelWidth, height: topLabelHeight)
+        self.topLabelView.backgroundColor = UIColor(red: 241/255, green: 89/255, blue: 90/255, alpha: 1)
+        self.view.addConstraint(width)
+        self.view.addConstraint(height)
+        self.view.addConstraint(centerY)
+        self.view.addConstraint(centerX)
         
-        topView.addSubview(topLabel)
+        addConstraintsForNewEchoLabel()
         
-        nextBtn.layer.zPosition = 1
-        cancelBtn.layer.zPosition = 1
-        nextBtn.userInteractionEnabled = true
-        cancelBtn.userInteractionEnabled = true
         
-        topView.backgroundColor = UIColor(red: 241/255, green: 89/255, blue: 90/255, alpha: 1)
-        
-        self.view.addSubview(topView)
+    }
+    
+    func addConstraintsForNewEchoLabel(){
+        let height = NSLayoutConstraint(item: self.newEchoLabel, attribute: .Height, relatedBy: .Equal, toItem: self.topLabelView, attribute: .Height, multiplier: 0.15, constant: 0)
+        let width = NSLayoutConstraint(item: self.newEchoLabel, attribute: .Width, relatedBy: .Equal, toItem: self.view, attribute: .Width, multiplier: 0.4, constant: 0)
+        self.view.addConstraint(height)
+        self.view.addConstraint(width)
         
     }
     
