@@ -32,22 +32,19 @@ class UploadViewController: UIViewController {
     
 
     @IBAction func shareEcho(sender: UIButton) {
-        var myRootRef = Firebase(url: "https://burning-fire-8901.firebaseio.com")
+        let myRootRef = Firebase(url: "https://burning-fire-8901.firebaseio.com")
         let voiceRef = Firebase(url: "https://burning-fire-8901.firebaseio.com/voice")
 
         //myRootRef.setValue("Hi");
         
-        let name = self.voiceUID
+        let base64String = voiceData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
         
-        
-        let base64String = voiceData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength) as! String
-        
-        var currentDateTime = NSDate()
-        var formatter = NSDateFormatter()
+        let currentDateTime = NSDate()
+        let formatter = NSDateFormatter()
         formatter.dateFormat = "ddMMyyyy-HHmm"
-        var uploadTime = formatter.stringFromDate(currentDateTime) as! String
+        let uploadTime = formatter.stringFromDate(currentDateTime)
         
-        let recording: NSDictionary = ["user": myRootRef.authData.uid as! String,
+        let recording: NSDictionary = ["user": myRootRef.authData.uid,
                                        "quote": quoteTextField.text ,
                                        "voiceBase64":base64String,
                                        "location": "Durham, NC",

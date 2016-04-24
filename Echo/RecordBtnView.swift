@@ -87,11 +87,13 @@ class RecordBtnView: UIView {
     }
     
     func stopPlaying(){
+        print("Stop Playing")
         addConstraints()
         self.pauseImageView?.removeFromSuperview()
         self.recordingImgView?.removeFromSuperview()
-        self.addSubview(playImgView!)
         self.progressView?.stopAnimation()
+
+        self.addSubview(playImgView!)
         
         currentState = .Done
         

@@ -97,8 +97,12 @@ class CircularLoaderView: UIView {
     }
     
     func animationDidStop() -> Bool {
-        print("sending notification")
+        
         if (!replayPressed){
+            print("sending notification")
+            stopAnimation()
+            NSNotificationCenter.defaultCenter().postNotificationName(myNotificationKey , object: self)
+        } else {
             NSNotificationCenter.defaultCenter().postNotificationName(myNotificationKey , object: self)
         }
             return true

@@ -11,6 +11,11 @@ import AVFoundation
 import Firebase
 
 class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioPlayerDelegate {
+    
+    var topView: UIView!
+    
+    @IBOutlet weak var nextBtn: UIButton!
+    @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var recordAgainBtn: UIButton!
     
     var audioRecorder: AVAudioRecorder!
@@ -41,14 +46,10 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
         
          NSNotificationCenter.defaultCenter().addObserver(self, selector: "receiveBtnState", name: "com.yingqi.Echo.RecordButtonState", object: nil)
         
+        loadTopView()
+        
         /* Request user permission to access microphone */
-        recordBtnView = RecordBtnView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
-        
-        
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("handleBtnTap:"))
-        self.recordBtnView!.addGestureRecognizer(gestureRecognizer)
-        //self.view.addGestureRecognizer(gestureRecognizer)
-        self.view.addSubview(recordBtnView!)
+        loadRecordViewBtn()
         
         
         recordingSession = AVAudioSession.sharedInstance()
@@ -93,9 +94,16 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
     
     // Playing to stop Playing
     func receiveBtnState(){
-            self.recordBtnView!.currentState = .Done
-            self.recordBtnView?.stopPlaying()
-           // self.stopListening()
+        if (self.recordBtnView!.currentState == .Playing){
+            // Finished recording. Playing. Play complete
+            print("Finished Re-playing")
+            recordBtnView?.stopPlaying()
+        }
+        self.recordBtnView!.currentState = .Done
+        self.recordBtnView?.stopPlaying()
+        // self.stopListening()
+        
+
         
         
     }
@@ -216,7 +224,9 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
     @IBAction func recordAgain(sender: UIButton) {
         
         //self.recordBtnView?.beginRecording()
-        audioRecorder.stop()
+        if (audioRecorder != nil){
+            audioRecorder.stop()
+        }
         print("ready -> recording ...")
         self.recordBtnView?.recordAgain()
        // self.startRecording()
@@ -262,6 +272,7 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
     
     
     @IBAction func goToUpload(sender: UIButton) {
+        print("next button touched")
         self.performSegueWithIdentifier("showUploadVC", sender: self)
         
     }
@@ -319,6 +330,45 @@ class RecordViewController: UIViewController,  AVAudioRecorderDelegate, AVAudioP
             uploadVC.voiceData = self.dataToUpload
             uploadVC.voiceUID = self.uid
         }
+    }
+    
+    func loadRecordViewBtn(){
+
+        let sideLen = self.view.frame.width/2
+        let centerX = self.view.frame.width/2 - sideLen/2
+        let centerY = self.view.frame.height/2 - sideLen/2
+        let center = CGPoint(x: centerX, y: centerY)
+        let size = CGSize(width: sideLen, height: sideLen)
+        recordBtnView = RecordBtnView(frame: CGRect(origin: center, size: size))
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("handleBtnTap:"))
+        self.recordBtnView!.addGestureRecognizer(gestureRecognizer)
+        //self.view.addGestureRecognizer(gestureRecognizer)
+        self.view.addSubview(recordBtnView!)
+        
+    }
+    
+    func loadTopView() {
+        topView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height/8))
+        
+        let topLabel = UIImageView(image: UIImage(named: "new_echo_label"))
+        
+        let topLabelWidth = topView.frame.width/3
+        
+        let topLabelHeight = topView.frame.height * 0.2
+        
+        topLabel.frame = CGRect(x: topView.frame.width/2 - topLabelWidth/2, y: topView.frame.height/2 - topLabelHeight/2 + 10 , width: topLabelWidth, height: topLabelHeight)
+        
+        topView.addSubview(topLabel)
+        
+        nextBtn.layer.zPosition = 1
+        cancelBtn.layer.zPosition = 1
+        nextBtn.userInteractionEnabled = true
+        cancelBtn.userInteractionEnabled = true
+        
+        topView.backgroundColor = UIColor(red: 241/255, green: 89/255, blue: 90/255, alpha: 1)
+        
+        self.view.addSubview(topView)
+        
     }
     
 
