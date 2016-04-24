@@ -88,7 +88,7 @@ class UploadViewController: UIViewController {
     func styleShareButton(){
         self.shareBtn.backgroundColor = UIColor(red: 241/255, green: 90/255, blue: 90/255, alpha: 1)
         self.shareBtn.tintColor = UIColor.whiteColor()
-        self.shareBtn.layer.cornerRadius = 20
+        self.shareBtn.layer.cornerRadius = 15
         let width = NSLayoutConstraint(item: self.shareBtn, attribute: .Width, relatedBy: .Equal, toItem: self.view, attribute: .Width, multiplier: 0.3, constant: 0)
         self.view.addConstraint(width)
     }

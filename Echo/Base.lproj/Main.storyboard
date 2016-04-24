@@ -209,7 +209,7 @@
         <!--Profile-->
         <scene sceneID="KwC-Ub-OKF">
             <objects>
-                <viewController id="177-q4-z3m" sceneMemberID="viewController">
+                <viewController id="177-q4-z3m" customClass="ProfileViewController" customModule="Echo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CB6-x0-3p7"/>
                         <viewControllerLayoutGuide type="bottom" id="OFX-5D-6DM"/>
@@ -217,14 +217,22 @@
                     <view key="view" contentMode="scaleToFill" id="yhp-uA-YR5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.89092300790000001" blue="0.45670603319999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zyd-gd-YXp">
+                                <rect key="frame" x="0.0" y="236" width="600" height="315"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.2470588235" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="profile_icon" id="8ml-Xd-LMU"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="translatesAutoresizingMaskIntoConstraints" value="NO"/>
+                    </userDefinedRuntimeAttributes>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AC9-2G-vJh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="676" y="875"/>
+            <point key="canvasLocation" x="696" y="1799"/>
         </scene>
         <!--Upload View Controller-->
         <scene sceneID="bgo-RX-q9p">
@@ -318,7 +326,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ru-Ae-XUV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-361" y="1765"/>
+            <point key="canvasLocation" x="-609" y="1785"/>
         </scene>
         <!--Explore-->
         <scene sceneID="mgF-zo-bKm">
@@ -332,15 +340,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Explore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4u-i0-vZc">
-                                <rect key="frame" x="272" y="179" width="57" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="172" y="179" width="57" height="21"/>
-                                </variation>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YIK-Go-aQ6">
                                 <rect key="frame" x="547" y="36" width="33" height="29"/>
                                 <constraints>
@@ -349,11 +348,8 @@
                                 </constraints>
                                 <state key="normal" image="setting_icon"/>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="echo_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ZLl-v2-cny">
-                                <rect key="frame" x="249" y="36" width="103" height="37"/>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="131" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AOe-EA-BRW">
-                                <rect key="frame" x="0.0" y="85" width="600" height="466"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="131" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AOe-EA-BRW">
+                                <rect key="frame" x="0.0" y="134" width="600" height="466"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="466" placeholder="YES" id="tVd-SF-XoH"/>
@@ -489,6 +485,9 @@
                                     <outlet property="delegate" destination="QGq-1P-QLg" id="KOv-iu-Piy"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="echo_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ZLl-v2-cny">
+                                <rect key="frame" x="249" y="36" width="103" height="82"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.2470588235" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -500,7 +499,6 @@
                             <constraint firstItem="AOe-EA-BRW" firstAttribute="top" secondItem="ZLl-v2-cny" secondAttribute="bottom" constant="16" placeholder="YES" id="Fl1-wf-4Bu"/>
                             <constraint firstItem="ZLl-v2-cny" firstAttribute="leading" secondItem="dJ3-ma-oox" secondAttribute="leadingMargin" constant="229" placeholder="YES" id="X8b-iw-GUs"/>
                             <constraint firstItem="AOe-EA-BRW" firstAttribute="leading" secondItem="dJ3-ma-oox" secondAttribute="leading" id="eDd-ld-c95"/>
-                            <constraint firstItem="AOe-EA-BRW" firstAttribute="centerX" secondItem="u4u-i0-vZc" secondAttribute="centerX" id="hPK-xS-GJV"/>
                             <constraint firstItem="AOe-EA-BRW" firstAttribute="centerX" secondItem="ZLl-v2-cny" secondAttribute="centerX" id="xfx-Vv-sSE"/>
                         </constraints>
                     </view>
@@ -514,7 +512,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYQ-M1-2n6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="366" y="1801"/>
+            <point key="canvasLocation" x="52" y="1791"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="QTz-YN-dOj">
@@ -538,7 +536,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ecQ-Wm-3bw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1051" y="1665"/>
+            <point key="canvasLocation" x="383" y="2489"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lUh-u7-QXy">

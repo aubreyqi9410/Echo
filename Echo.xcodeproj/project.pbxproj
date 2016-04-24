@@ -29,6 +29,8 @@
 		3F394B371CB8ABAF0082F732 /* RecordBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F394B361CB8ABAF0082F732 /* RecordBtnView.swift */; settings = {ASSET_TAGS = (); }; };
 		3F394B391CB96F8C0082F732 /* ButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F394B381CB96F8C0082F732 /* ButtonState.swift */; settings = {ASSET_TAGS = (); }; };
 		3F394B3B1CB983610082F732 /* NSNotificationCenterKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F394B3A1CB983610082F732 /* NSNotificationCenterKeys.swift */; settings = {ASSET_TAGS = (); }; };
+		3F8514151CCD14F1006A0288 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8514141CCD14F1006A0288 /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		3F8514171CCD15D6006A0288 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8514161CCD15D6006A0288 /* MainViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		6C5036A613AB26C94FE8AA2A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C0CFA9DEBB7C77F8F097D70 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -78,6 +80,8 @@
 		3F394B361CB8ABAF0082F732 /* RecordBtnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordBtnView.swift; sourceTree = "<group>"; };
 		3F394B381CB96F8C0082F732 /* ButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonState.swift; sourceTree = "<group>"; };
 		3F394B3A1CB983610082F732 /* NSNotificationCenterKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNotificationCenterKeys.swift; sourceTree = "<group>"; };
+		3F8514141CCD14F1006A0288 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		3F8514161CCD15D6006A0288 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		6689266739FA845182F693AF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7C0CFA9DEBB7C77F8F097D70 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21F5352CEF724271434D1F8 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 				3F2402CA1CB2ED1200E0E92D /* PlayBtnView.swift */,
 				3F394B361CB8ABAF0082F732 /* RecordBtnView.swift */,
 				3F394B381CB96F8C0082F732 /* ButtonState.swift */,
+				3F8514141CCD14F1006A0288 /* ProfileViewController.swift */,
+				3F8514161CCD15D6006A0288 /* MainViewController.swift */,
 			);
 			path = Echo;
 			sourceTree = "<group>";
@@ -381,7 +387,9 @@
 				3F2402C31CB2DF4F00E0E92D /* CircularLoaderView.swift in Sources */,
 				3F1CAC291C74BA950048BB0C /* Voice.swift in Sources */,
 				3F1CAC271C74B9F10048BB0C /* LoginViewController.swift in Sources */,
+				3F8514171CCD15D6006A0288 /* MainViewController.swift in Sources */,
 				3F2E729F1CAA48B000DB3E35 /* SignUpViewController.swift in Sources */,
+				3F8514151CCD14F1006A0288 /* ProfileViewController.swift in Sources */,
 				3F394B3B1CB983610082F732 /* NSNotificationCenterKeys.swift in Sources */,
 				3F394B371CB8ABAF0082F732 /* RecordBtnView.swift in Sources */,
 				3F2361DC1C87341B008C53E8 /* RecordViewController.swift in Sources */,
