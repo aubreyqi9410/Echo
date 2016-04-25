@@ -12,12 +12,6 @@ import Firebase
 class ExplorationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     
-    struct Echo {
-        var name: String!
-        var location: String!
-        var voiceData: NSData!
-    }
-    
     var tableData: [Echo] = []
 
     @IBOutlet weak var tableView: UITableView!
@@ -60,15 +54,14 @@ class ExplorationViewController: UIViewController, UITableViewDelegate, UITableV
         
         ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
             //print("value: " , snapshot.value)
-            let test = snapshot.childrenCount
-            let enumerator = snapshot.children
+
             for rest in snapshot.children.allObjects as! [FDataSnapshot]{
                 print("loading echo")
                 
                 let username = rest.value.objectForKey("user") as! String
                 let base64String = rest.value.objectForKey("voiceBase64") as! String
                 let quote = rest.value.objectForKey("quote") as! String
-                var decodeData = NSData(base64EncodedString: base64String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
+                let decodeData = NSData(base64EncodedString: base64String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
                 let echo = Echo(name: username, location: quote, voiceData: decodeData)
                 
                 self.tableData.append(echo)

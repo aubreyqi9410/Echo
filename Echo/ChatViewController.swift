@@ -2,25 +2,18 @@
 //  ChatViewController.swift
 //  Echo
 //
-//  Created by Ying Qi on 4/4/16.
+//  Created by Ying Qi on 4/24/16.
 //  Copyright © 2016 Duke University. All rights reserved.
 //
 
 import UIKit
 
-class ChatViewController: UIViewController {
+class ChatViewController: MainViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        //let progressView = CircularLoaderView(frame: CGRectMake(100, 100, 100, 100))
-        //self.view.addSubview(progressView)
-        //progressView.animateProgressView(10.0)
-        
-        let playBtn = PlayBtnView(frame: CGRectMake(100, 100, 100, 100), duration: 20)
-        self.view.addSubview(playBtn)
-        print("view loaded")
     }
 
     override func didReceiveMemoryWarning() {
